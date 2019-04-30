@@ -2,3 +2,5 @@
 
 language: R
 cache: packages
+# wanrings are not errors
+warnings_are_errors: false

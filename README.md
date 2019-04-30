@@ -1,5 +1,6 @@
 <!-- badges: start -->
-  [![Codecov test coverage](https://codecov.io/gh/rix133/ormPlot/branch/master/graph/badge.svg)](https://codecov.io/gh/rix133/ormPlot?branch=master)
+[![Build Status](https://travis-ci.com/rix133/ormPlot.svg?branch=master)](https://travis-ci.com/rix133/ormPlot)
+[![Codecov test coverage](https://codecov.io/gh/rix133/ormPlot/branch/master/graph/badge.svg)](https://codecov.io/gh/rix133/ormPlot?branch=master)
 <!-- badges: end -->
 
 # Plotting ordinal regression models from R package rms

@@ -1,11 +1,13 @@
 
-orm.forestplot<-function(summary_object, plot.widths = c(0.5, 0.5)){
+orm.forestplot<-function(summary_object, plot.widths = c(0.5, 0.5), digits = 3, theme = ggplot2::theme_get(), header = NULL, row.names.y = NULL){
   if(length(plot.widths)!=2 || signif(sum(plot.widths),3)!=1) stop("plot.widths should be a vector with 2 elements that sum to 1")
 
   oddstable <- orm.oddstable(summary_object)
 
-  tableplot <- plot.oddstable(oddstable)
-  tablegraph <- plot.orm.graph(oddstable)
+  if(is.null(row.names.y)) row.names.y = rownames(oddstable)
+
+  tableplot <- plot.oddstable(oddstable, digits = digits, theme = theme, header = header, row.names.y = row.names.y)
+  tablegraph <- plot.orm.graph(oddstable, theme = theme, header = header, row.names.y = row.names.y)
 
 
   #forestPlot<- gridExtra::grid.arrange(oddstable,tableplot, ncol=2)

@@ -1,5 +1,3 @@
-##  Proto library for accessing sub-components of the ggplot2 plot objects
-library(proto)
 
 #READ THE TEST DATA
 test_data_001<-readRDS("../testdata/test_data_001.rds")

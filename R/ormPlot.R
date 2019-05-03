@@ -1,10 +1,20 @@
 
-orm.forestplot<-function(summary_object){
+orm.forestplot<-function(summary_object, plot.widths = c(0.5, 0.5)){
+  if(length(plot.widths)!=2 || signif(sum(plot.widths),3)!=1) stop("plot.widths should be a vector with 2 elements that sum to 1")
+
   oddstable <- orm.oddstable(summary_object)
+
   tableplot <- plot.oddstable(oddstable)
+  tablegraph <- plot.orm.graph(oddstable)
 
 
-  return(tableplot)
+  #forestPlot<- gridExtra::grid.arrange(oddstable,tableplot, ncol=2)
+  tablewidth = grid::unit(c(plot.widths[1], plot.widths[2]), c("npc"))
+  p1g<-ggplot2::ggplotGrob(tablegraph)
+  p2g<-ggplot2::ggplotGrob(tableplot)
+  forestPlot<-gtable::gtable_row("forestplot", list(p1g, p2g),widths = tablewidth, height = grid::unit(1, "npc"))
+
+  invisible(forestPlot)
 
 
 }
@@ -30,65 +40,81 @@ orm.oddstable <- function(x, ..., type="plain", digits = 5, table.env=FALSE)
   )
 }
 
-plot.oddstable<-function(x, digits = 3){
-  x<-as.data.frame(x)
-  lables = colnames(x)
-  tableplot<-ggplot2::ggplot(x,ggplot2::aes(y=rownames(x)))+
-    ggplot2::geom_text(ggplot2::aes(x=lables[4], label=round(x[,4],digits))) +
-    ggplot2::geom_text(ggplot2::aes(x=lables[6], label=round(x[,6], digits))) +
-    ggplot2::geom_text(ggplot2::aes(x=lables[7], label=round(x[,7], digits))) +
-    ggplot2::scale_x_discrete(position="top", name = NULL) +
-    ggplot2::scale_y_discrete(limits= rev(rownames(x))) +
+plot.oddstable<-function(x, digits = 3, theme = ggplot2::theme_get(), header = NULL, row.names.y = rownames(x) ){
+  columns = c(4,6,7)
+
+  if(is.vector(header) && length(header) == length(columns)){
+    #keep the provided header
+  }
+  else {
+    header <- colnames(x[,columns])
+  }
+  #setting the theme from the function
+  ggplot2::theme_set(theme)
+
+  if(!is.data.frame(x)) x<-as.data.frame(x)
+
+  tableplot<- ggplot2::ggplot(x,ggplot2::aes(y=rownames(x))) +
+    ggplot2::scale_x_discrete(position="top", name = NULL, labels = header, breaks =colnames(x[,columns]))
+
+  tableplot<- tableplot +
+    ggplot2::geom_text(ggplot2::aes(x=colnames(x)[4], label=round(x[,4],digits))) +
+    ggplot2::geom_text(ggplot2::aes(x=colnames(x)[6], label=round(x[,6],digits))) +
+    ggplot2::geom_text(ggplot2::aes(x=colnames(x)[7], label=round(x[,7],digits)))
+
+  tableplot <- tableplot +  ggplot2::scale_y_discrete(limits= rev(rownames(x)), labels = rev(row.names.y)) +
     ggplot2::theme(axis.ticks = ggplot2::element_blank(),
                    axis.title.y = ggplot2::element_blank(),
                    axis.line.y = ggplot2::element_blank(),
-                   axis.text = ggplot2::theme_get()$text)
-
+                   axis.text.y = ggplot2::element_text(hjust = 1),
+                   axis.text = theme$text)
 
   invisible(tableplot)
 
 }
 
-plot.orm.graph<-function(x, custom.row.names = c(), ylab = "Odds ratio (95% CI)"){
-    #set the theme
-    ggplot2::theme_set(ggplot2::theme_bw())
-    #set some other theme options#
-    ggplot2::theme_update(
-    axis.line = ggplot2::element_line(colour = "black"),
-    panel.grid.major = ggplot2::element_blank(),
-    panel.grid.minor = ggplot2::element_blank(),
-    panel.border = ggplot2::element_blank(),
-    panel.background = ggplot2::element_blank(),
-    axis.text.y = ggplot2::element_blank(),
-    axis.ticks.y = ggplot2::element_blank(),
-    axis.title.y= ggplot2::element_blank(),
-    text = ggplot2::element_text(size = 12),
-    plot.margin = grid::unit(c(0,0,0,0), "lines")
-  )
-    x$lables <-rownames(x)
-    print("70")
-    if(length(custom.row.names) == nrow(x)){
-      x$lables <- custom.row.names
-    }
+plot.orm.graph<-function(x, theme = ggplot2::theme_get(), header = NULL, row.names.y = rownames(x),  ylab = "Odds ratio (95% CI)"){
+  #set the theme
+  ggplot2::theme_set(theme)
 
-    p<-ggplot2::ggplot(x, aes(x=lables,y=Effect, ymin=`Lower 0.95`, ymax= `Upper 0.95`))+
-      ggplot2::geom_pointrange() +
+  if(!is.data.frame(x)) x<-as.data.frame(x)
 
-      # add a dotted line at x=1 after flip
-      ggplot2::geom_hline(yintercept=1, lty=2) +
 
-      # flip coordinates (puts labels on y axis)
-      ggplot2::coord_flip() +
-      ggplot2::ylab(ylab) +
+  if(!length(row.names.y) == nrow(x)){
+    row.names.y = rownames(x)
+  }
 
-      ggplot2::scale_y_continuous(breaks = c(0.5,1,1.5,2,3,4)) +
-      # set the y lables sam for plot and table
-      ggplot2::scale_x_discrete(limits = rev(tabletext[,1])) +
+  p<-ggplot2::ggplot(x, ggplot2::aes(x=row.names.y,y=Effect, ymin=`Lower 0.95`, ymax= `Upper 0.95`))+
+    ggplot2::geom_pointrange() +
 
-      # use the theme set prevoiosly
-      ggplot2::theme()
+    # add a dotted line at x=1 after flip
+    ggplot2::geom_hline(yintercept=1, lty=2) +
 
-    invisible(p)
+    # flip coordinates (puts labels on y axis)
+    ggplot2::coord_flip() +
+    #ggplot2::ylab(ylab) +
+    #TODO set the breaks at appropriate places automatically and allow override
+    ggplot2::scale_y_continuous(breaks = c(0.5,1,1.5,2,3,4), position = "right") +
+    # set the y lables sam for plot and table
+    ggplot2::scale_x_discrete(limits = rev(row.names.y)) +
+
+    # use the theme set prevoiosly
+    ggplot2::theme(
+      axis.line = ggplot2::element_line(colour = "black"),
+      panel.grid.major = ggplot2::element_blank(),
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.border = ggplot2::element_blank(),
+      panel.background = ggplot2::element_blank(),
+      axis.text.y = ggplot2::element_blank(),
+      axis.ticks.y = ggplot2::element_blank(),
+      axis.title.y= ggplot2::element_blank(),
+      axis.title.x= ggplot2::element_blank(),
+      text = ggplot2::element_text(size = 12),
+      axis.text = theme$text,
+      plot.margin = grid::unit(c(0,0,0,0), "lines")
+    )
+
+  invisible(p)
 }
 
 

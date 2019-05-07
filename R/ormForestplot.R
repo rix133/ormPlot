@@ -1,5 +1,5 @@
 
-orm.forestplot<-function(summary_object, plot.widths = c(0.5, 0.5), digits = 3, theme = ggplot2::theme_get(), header = NULL, row.names.y = NULL){
+orm.forestplot<-function(summary_object, plot.widths = c(0.5, 0.5), digits = 3, theme = ggplot2::theme_get(), header = NULL, row.names.y = NULL, return_ggplots = FALSE){
   if(length(plot.widths)!=2 || signif(sum(plot.widths),3)!=1) stop("plot.widths should be a vector with 2 elements that sum to 1")
 
   oddstable <- orm.oddstable(summary_object)
@@ -9,16 +9,27 @@ orm.forestplot<-function(summary_object, plot.widths = c(0.5, 0.5), digits = 3, 
   tableplot <- plot.oddstable(oddstable, digits = digits, theme = theme, header = header, row.names.y = row.names.y)
   tablegraph <- plot.orm.graph(oddstable, theme = theme, header = header, row.names.y = row.names.y)
 
+  if(return_ggplots){
+    return(list(tableplot,tablegraph))
 
-  #forestPlot<- gridExtra::grid.arrange(oddstable,tableplot, ncol=2)
+  }
+  else{
+    forestPlot<- join.ggplots(tableplot, tablegraph, plot.widths)
+
+    invisible(forestPlot)
+  }
+
+
+
+}
+
+join.ggplots<-function(leftplot, rightplot, plot.widths = c(0.5, 0.5)){
   tablewidth = grid::unit(c(plot.widths[1], plot.widths[2]), c("npc"))
-  p1g<-ggplot2::ggplotGrob(tablegraph)
-  p2g<-ggplot2::ggplotGrob(tableplot)
+  p1g<-ggplot2::ggplotGrob(leftplot)
+  p2g<-ggplot2::ggplotGrob(rightplot)
   forestPlot<-gtable::gtable_row("forestplot", list(p1g, p2g),widths = tablewidth, height = grid::unit(1, "npc"))
 
   invisible(forestPlot)
-
-
 }
 
 
@@ -66,6 +77,10 @@ plot.oddstable<-function(x, digits = 3, theme = ggplot2::theme_get(), header = N
 
   tableplot <- tableplot +  ggplot2::scale_y_discrete(limits= rev(rownames(x)), labels = rev(row.names.y)) +
     ggplot2::theme(axis.ticks = ggplot2::element_blank(),
+                   panel.grid.major = ggplot2::element_blank(),
+                   panel.grid.minor = ggplot2::element_blank(),
+                   panel.background = ggplot2::element_blank(),
+                   axis.line.x = ggplot2::element_line(colour = "black"),
                    axis.title.y = ggplot2::element_blank(),
                    axis.line.y = ggplot2::element_blank(),
                    axis.text.y = ggplot2::element_text(hjust = 1),

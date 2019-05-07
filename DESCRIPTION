@@ -12,8 +12,8 @@ Imports:
     ggplot2,
     rms,
     gtable,
-    grid,
-    gridExtra
+    grid
 Suggests: 
     testthat (>= 2.1.0),
+    vdiffr,
     covr

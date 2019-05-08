@@ -5,7 +5,7 @@ orm.predictwithCI<-function(x, ... , np = 100, fun = plogis, boot.type = "bca" )
   last_pred <- data.frame(yhat=rep(0,items), lower=rep(0,items), upper=rep(0,items))
   preds<-list()
   j <- 1
-  for(i in ((length(ocran$yunique)-1):1)){
+  for(i in ((length(x$yunique)-1):1)){
     pred<-rms::Predict(x, ..., type = "predictions", np=np, fun = fun, kint = i, conf.type = "mean", boot.type = boot.type)[9:11]-last_pred
     preds[[j]]<-pred
     j <- j + 1
@@ -13,7 +13,7 @@ orm.predictwithCI<-function(x, ... , np = 100, fun = plogis, boot.type = "bca" )
     last_pred<-pred
 
   }
-  preds[[length(ocran$yunique)]]<-1-all_preds
+  preds[[length(x$yunique)]]<-1-all_preds
 
   preds <- rev(preds)
 
@@ -21,7 +21,7 @@ orm.predictwithCI<-function(x, ... , np = 100, fun = plogis, boot.type = "bca" )
 
   counter <- 1
   all_preds<-data.frame()
-  for(item in ocran$yunique){
+  for(item in x$yunique){
 
     all_preds <- rbind(all_preds, cbind(pred_frame,preds[[counter]],dependent=item))
     counter <- counter + 1

@@ -2,12 +2,14 @@ Package: ormPlot
 Type: Package
 Title: Advanced plotting orm models from rms package
 Version: 0.1.0
-Author: Richard Meitern
-Maintainer: The package maintainer <richard.meitern@ut.ee>
+Authors@R: c(person("Richard", "Meitern", , "richard.meitern@ut.ee", c("aut", "cre")))
+Maintainer: Richard Meitern <richard.meitern@ut.ee>
 Description: this is a work in progress r-package to extend the ordinal regression model plotting capabilties of rms package 
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 3.1)
 Imports: 
     ggplot2,
     rms,

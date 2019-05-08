@@ -117,6 +117,7 @@ plot.orm.graph<-function(x, theme = ggplot2::theme_get(), header = NULL, row.nam
 
     # use the theme set prevoiosly
     ggplot2::theme(
+      axis.ticks.x.top = ggplot2::element_line(colour = "black"),
       axis.line = ggplot2::element_line(colour = "black"),
       panel.grid.major = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),

@@ -48,6 +48,10 @@ plot.orm.predictwithCI<-function(model, ... , plot_cols = NULL, plot_rows = NULL
     }
 
   }
+  else{
+    plot_cols<-do.call(ggplot2::vars, lapply(plot_cols, as.name))
+    plot_rows<-do.call(ggplot2::vars, lapply(plot_rows, as.name))
+  }
 
   res<-orm.predictwithCI(model, ...)
   x<-deparse(substitute(...))
@@ -65,7 +69,7 @@ plot.orm.predictwithCI<-function(model, ... , plot_cols = NULL, plot_rows = NULL
 
 
   #set what data to draw and where/how i.e. cran residSD in x etc.
-  pred_plot<-ggplot(res, ggplot2::aes_string(x=x, y="Propability", color="dependent")) +
+  pred_plot<-ggplot2::ggplot(res, ggplot2::aes_string(x=x, y="Propability", color="dependent")) +
 
     # add the lines
     ggplot2::geom_line(size=1) +

@@ -84,7 +84,8 @@ plot.oddstable<-function(x, digits = 3, theme = ggplot2::theme_get(), header = N
                    axis.title.y = ggplot2::element_blank(),
                    axis.line.y = ggplot2::element_blank(),
                    axis.text.y = ggplot2::element_text(hjust = 1),
-                   axis.text = theme$text)
+                   axis.text = theme$text,
+                   plot.margin = grid::unit(c(0,0,0,0), "lines"))
 
   invisible(tableplot)
 

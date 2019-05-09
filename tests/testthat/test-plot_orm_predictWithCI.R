@@ -1,9 +1,9 @@
 
 #READ THE TEST DATA
-test_model_001<-readRDS("../testdata/test_model_001.rds")
+test_model_001 <- readRDS("../testdata/test_model_001.rds")
 
 test_that("returns a ggplot object", {
-  p <- plot.orm.predictwithCI(test_model_001,cran_rzs, Rural)
+  p <- plot.orm.predictwithCI(test_model_001, cran_rzs, Rural)
   expect_true(ggplot2::is.ggplot(p))
 })
 
@@ -18,8 +18,8 @@ test_that("plotting test data changes element names and order", {
                       plot_rows = c("Rural", "sex"),
                       xlab = "Cranial volume (residuals to age an birth date)",
                       facet_lables = list(Rural = c("Urban", "Rural"),
-                                          sex=c("Boys","Girls"),
-                                          max_SEP_3=c("Unskilled manual",
+                                          sex = c("Boys","Girls"),
+                                          max_SEP_3 = c("Unskilled manual",
                                                       "Skilled manual",
                                                       "Non-manual"))
   )

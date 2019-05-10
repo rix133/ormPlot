@@ -2,13 +2,13 @@
 test_model_001<-readRDS("../testdata/test_model_001.rds")
 
 test_that("result is a data frame", {
-  p <- orm.predictwithCI(test_model_001, cran_rzs, Rural, max_SEP_3, sex)
+  p <- orm.predict_with_ci(test_model_001, cran_rzs, Rural, max_SEP_3, sex)
   expect_true(is.data.frame(p))
 })
 
 test_that("result has expected prediction data in it", {
   n = 10
-  df <- orm.predictwithCI(test_model_001, cran_rzs, Rural, max_SEP_3, sex, np = n)
+  df <- orm.predict_with_ci(test_model_001, cran_rzs, Rural, max_SEP_3, sex, np = n)
 
   ocran_pred_frame<-rms::Predict(test_model_001, cran_rzs, Rural, max_SEP_3, sex, type = "model.frame",np=n)
 

@@ -4,17 +4,26 @@
 #' \code{summary.rms} output to facilitate the automatic plotting
 #'  of orm summary into a ggplot forestplot
 #'
+#' @inheritParams orm_summary.default
+#'
 #' @method summary orm
 #' @export
-"summary.orm"<-function(x, ...){
+"summary.orm"<-function(object, ...){
     UseMethod("orm_summary")
 
 }
 
-
+#' Get an extended rms summary object
+#'
+#' This fuctions adds a \code{summary.orm} class attribute to a
+#' \code{summary.rms} output to facilitate the automatic plotting
+#'  of orm summary into a ggplot forestplot
+#'
+#'  @param object a \code{\link[rms]{orm}}  model object
+#'
 #' @export
-orm_summary.default<-function(x,...){
-    summary_obj<-rms:::summary.rms(x, ...)
+orm_summary.default<-function(object,...){
+    summary_obj<-rms:::summary.rms(object, ...)
     #for plotting function to use the custom plot for orm
     attr(summary_obj, "class") <- c("summary.orm", class(summary_obj))
     return(summary_obj)
@@ -38,7 +47,7 @@ orm_summary.default<-function(x,...){
 #'
 #' @method summary orm
 #' @export
-"plot.summary.orm"<-function(summary_obj, return_ggplots = FALSE, ...,
+"plot.summary.orm"<-function(object, return_ggplots = FALSE, ...,
                              digits, theme, header, row.names.y){
     UseMethod("forestplot")
 }
@@ -48,19 +57,18 @@ orm_summary.default<-function(x,...){
 #'
 #' Function to get aligned table and plot of the Odds ratio
 #'
-#'#' @param return_ggplots if \code{TRUE} the fuction returns 2 ggplot objects
+#' @param return_ggplots if \code{TRUE} the fuction returns 2 ggplot objects
 #'  in a list instead of drawing a tablegrid
-#' @param  summary_obj result of a \code{summary} command on
+#' @param  object result of a \code{summary} command on
 #'  \code{\link[rms]{orm}}  model
 #' @inheritParams join_ggplots
 #' @inheritDotParams oddstable_graph
 #'
-#' @export
-forestplot.default <- function(summary_obj, return_ggplots = FALSE,
+forestplot.default <- function(object, return_ggplots = FALSE,
                                plot.widths = c(0.5, 0.5),
                                title = "Odds Ratio" , ...) {
 
-    oddstable <- oddstable(summary_obj)
+    oddstable <- oddstable(object)
 
     tableplot <- oddstable_graph(oddstable, ...)
 
@@ -106,6 +114,7 @@ join_ggplots <- function(leftplot, rightplot,
     invisible(forestplot)
 }
 #' Get row names from odd an values form even columns
+#' @param x a \code{maxtrix} with even number of rows
 oddstable <- function(x) {
         if (nrow(x) %% 2 == 0) {
             cstats <- x[c(FALSE, TRUE), c(1:7)]
@@ -122,6 +131,7 @@ oddstable <- function(x) {
 #'
 #' Function to get a ggplot table from a matrix
 #'
+#' @param x a \code{maxtrix} or a \code{data.frame}
 #' @param digits the number of siginficants digits to display
 #' @param theme the desired ggplot2 theme
 #' @param header names of the table columns
@@ -183,6 +193,7 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
 #'
 #' Function to get a ggplot figure from a matrix x
 #'
+#' @param x a \code{maxtrix} or a \code{data.frame}
 #' @param theme the desired ggplot2 theme
 #' @param header names of the table columns
 #' @param row.names.y new names for the variable rows
@@ -190,7 +201,7 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
 #'
 orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
                            row.names.y = NULL,
-                           ylab = "Odds ratio (95% CI)", ...) {
+                            ...) {
     # set the theme
     ggplot2::theme_set(theme)
 

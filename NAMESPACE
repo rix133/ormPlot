@@ -2,7 +2,6 @@
 
 S3method(plot,orm)
 S3method(summary,orm)
-export(forestplot.default)
 export(join_ggplots)
 export(orm.predict_with_ci)
 export(orm_summary.default)

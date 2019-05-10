@@ -4,12 +4,15 @@
 \alias{forestplot.default}
 \title{Draw forestplot from an orm model summary}
 \usage{
-forestplot.default(summary_obj, return_ggplots = FALSE,
-  plot.widths = c(0.5, 0.5), title = "Odds Ratio", ...)
+forestplot.default(object, return_ggplots = FALSE, plot.widths = c(0.5,
+  0.5), title = "Odds Ratio", ...)
 }
 \arguments{
-\item{summary_obj}{result of a \code{summary} command on
+\item{object}{result of a \code{summary} command on
 \code{\link[rms]{orm}}  model}
+
+\item{return_ggplots}{if \code{TRUE} the fuction returns 2 ggplot objects
+in a list instead of drawing a tablegrid}
 
 \item{plot.widths}{the relative widths of the left and right plot
 should be a vector (\code{c()})  with 2 elements that sum to 1 defaults to
@@ -19,6 +22,7 @@ equal widths}
 
 \item{...}{Arguments passed on to \code{oddstable_graph}
 \describe{
+  \item{x}{a \code{maxtrix} or a \code{data.frame}}
   \item{digits}{the number of siginficants digits to display}
   \item{theme}{the desired ggplot2 theme}
   \item{header}{names of the table columns}
@@ -27,8 +31,4 @@ equal widths}
 }
 \description{
 Function to get aligned table and plot of the Odds ratio
-}
-\details{
-#' @param return_ggplots if \code{TRUE} the fuction returns 2 ggplot objects
- in a list instead of drawing a tablegrid
 }

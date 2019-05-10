@@ -70,7 +70,7 @@ orm.predict_with_ci <- function(x, ..., np = 100,
 #'
 #' @seealso \code{\link[rms]{Predict}}
 #' @export
-plot.orm <- function(model, ..., plot_cols = NULL,
+plot.orm <- function(x, ..., plot_cols = NULL,
                                    plot_rows = NULL,
                                    label_with_colname = TRUE,
                                    facet_lables = NULL,
@@ -92,7 +92,7 @@ plot.orm <- function(model, ..., plot_cols = NULL,
         plot_rows <- do.call(ggplot2::vars, lapply(plot_rows, as.name))
     }
 
-    res <- orm.predict_with_ci(model, ... , fun = fun,
+    res <- orm.predict_with_ci(x, ... , fun = fun,
                              boot.type = boot.type,
                              conf.int = conf.int)
     x <- deparse(substitute(...))

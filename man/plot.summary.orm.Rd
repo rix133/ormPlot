@@ -4,12 +4,15 @@
 \alias{plot.summary.orm}
 \title{Forest Plot of an orm model summary}
 \usage{
-\method{summary}{orm}(summary_obj, return_ggplots = FALSE, ..., digits,
-  theme, header, row.names.y)
+\method{summary}{orm}(object, return_ggplots = FALSE, ..., digits, theme,
+  header, row.names.y)
 }
 \arguments{
-\item{summary_obj}{result of a \code{summary} command on
+\item{object}{result of a \code{summary} command on
 \code{\link[rms]{orm}}  model}
+
+\item{return_ggplots}{if \code{TRUE} the fuction returns 2 ggplot objects
+in a list instead of drawing a tablegrid}
 
 \item{...}{Arguments passed on to \code{join_ggplots}
 \describe{

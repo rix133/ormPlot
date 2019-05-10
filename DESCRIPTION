@@ -4,7 +4,8 @@ Title: Advanced plotting orm models from rms package
 Version: 0.1.0
 Authors@R: c(person("Richard", "Meitern", , "richard.meitern@ut.ee", c("aut", "cre")))
 Maintainer: Richard Meitern <richard.meitern@ut.ee>
-Description: this is a work in progress r-package to extend the ordinal regression model plotting capabilties of rms package 
+Description: This is a work in progress r-package to extend the ordinal
+    regression model plotting capabilties of rms package.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

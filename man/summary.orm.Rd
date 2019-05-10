@@ -4,7 +4,7 @@
 \alias{summary.orm}
 \title{Get an extended rms summary object}
 \usage{
-\method{summary}{orm}(x, ...)
+\method{summary}{orm}(object, ...)
 }
 \description{
 This fuctions adds a \code{summary.orm} class attribute to a

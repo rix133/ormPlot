@@ -5,9 +5,11 @@
 \title{Make a ggplot figure}
 \usage{
 orm_graph(x, theme = ggplot2::theme_get(), header = NULL,
-  row.names.y = NULL, ylab = "Odds ratio (95\% CI)", ...)
+  row.names.y = NULL, ...)
 }
 \arguments{
+\item{x}{a \code{maxtrix} or a \code{data.frame}}
+
 \item{theme}{the desired ggplot2 theme}
 
 \item{header}{names of the table columns}

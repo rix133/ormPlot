@@ -8,6 +8,8 @@ oddstable_graph(x, digits = 3, theme = ggplot2::theme_get(),
   header = NULL, row.names.y = NULL, ...)
 }
 \arguments{
+\item{x}{a \code{maxtrix} or a \code{data.frame}}
+
 \item{digits}{the number of siginficants digits to display}
 
 \item{theme}{the desired ggplot2 theme}

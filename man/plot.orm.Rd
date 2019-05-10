@@ -4,12 +4,18 @@
 \alias{plot.orm}
 \title{Plot the prediction with coeficent intervals}
 \usage{
-\method{plot}{orm}(model, ..., plot_cols = NULL, plot_rows = NULL,
+\method{plot}{orm}(x, ..., plot_cols = NULL, plot_rows = NULL,
   label_with_colname = TRUE, facet_lables = NULL, xlab = NULL,
   ylab = NULL, np = 100, fun = plogis, boot.type = "bca",
   conf.int = 0.95)
 }
 \arguments{
+\item{x}{
+	an \code{rms} fit object, or for \code{print} the result of \code{Predict}.
+	\code{options(datadist="d")} must have been specified (where
+	\code{d} was created by \code{datadist}), or 
+	it must have been in effect when the the model was fitted.}
+
 \item{...}{
 	One or more variables to vary, or single-valued adjustment values.
 	Specify a variable name without an equal sign to use the default

@@ -6,6 +6,9 @@
 \usage{
 oddstable(x)
 }
+\arguments{
+\item{x}{a \code{maxtrix} with even number of rows}
+}
 \description{
 Get row names from odd an values form even columns
 }

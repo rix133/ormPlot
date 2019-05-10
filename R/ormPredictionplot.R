@@ -1,6 +1,18 @@
-
-orm.predictwithCI <- function(x, ..., np = 100,
+#' Create a Prediction data.frame with coeficent intervals
+#'
+#' returns a \code{data.frame} object similar to the \code{\link[rms]{Predict}}
+#' however it adds a column dependent that lists all factor levels with
+#' appropriate cofficent intervals calcualted for each level
+#'
+#' @inheritParams rms::Predict
+#'
+#' @return a \code{data.frame}
+#'
+#' @seealso \code{\link[rms]{Predict}}
+#' @export
+orm.predict_with_ci <- function(x, ..., np = 100,
                               fun = plogis,
+                              conf.int = 0.95,
                               boot.type = "bca") {
     pred_frame <- rms::Predict(x, ..., type = "model.frame", np = np)
     items <- nrow(pred_frame)
@@ -13,6 +25,7 @@ orm.predictwithCI <- function(x, ..., np = 100,
         pred <- rms::Predict(x, ..., type = "predictions",
                              np = np, fun = fun, kint = i,
                              conf.type = "mean",
+                             conf.int = conf.int,
                              boot.type = boot.type)[9:11] - last_pred
         preds[[j]] <- pred
         j <- j + 1
@@ -42,14 +55,28 @@ orm.predictwithCI <- function(x, ..., np = 100,
     invisible(all_preds)
 }
 
-
-
-plot.orm.predictwithCI <- function(model, ..., plot_cols = NULL,
+#' Plot the prediction with coeficent intervals
+#'
+#' returns a \code{ggplot} object that can be further customized like any
+#' other ggplot
+#
+#'
+#' @inheritParams orm.predict_with_ci
+#' @param xlab A custom x-axis value (if specified)
+#' @param ylab A custom y-axis value (if specified)
+#'
+#'
+#' @return a \code{ggplot} plot object
+#'
+#' @seealso \code{\link[rms]{Predict}}
+#' @export
+plot.orm <- function(model, ..., plot_cols = NULL,
                                    plot_rows = NULL,
                                    label_with_colname = TRUE,
                                    facet_lables = NULL,
                                    xlab = NULL, ylab = NULL, np = 100,
-                                   fun = plogis, boot.type = "bca") {
+                                   fun = plogis, boot.type = "bca",
+                                   conf.int = 0.95) {
 
     if (is.null(plot_cols) && is.null(plot_rows)) {
         vars <- ggplot2::vars(...)
@@ -65,7 +92,9 @@ plot.orm.predictwithCI <- function(model, ..., plot_cols = NULL,
         plot_rows <- do.call(ggplot2::vars, lapply(plot_rows, as.name))
     }
 
-    res <- orm.predictwithCI(model, ...)
+    res <- orm.predict_with_ci(model, ... , fun = fun,
+                             boot.type = boot.type,
+                             conf.int = conf.int)
     x <- deparse(substitute(...))
     if (!is.null(facet_lables) && is.list(facet_lables)) {
         label_with_colname <- FALSE

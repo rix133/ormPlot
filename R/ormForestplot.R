@@ -1,28 +1,78 @@
+#' Get an extended rms summary object
+#'
+#' This fuctions adds a \code{summary.orm} class attribute to a
+#' \code{summary.rms} output to facilitate the automatic plotting
+#'  of orm summary into a ggplot forestplot
+#'
+#' @method summary orm
+#' @export
+"summary.orm"<-function(x, ...){
+    UseMethod("orm_summary")
 
-orm.forestplot <- function(summary_object, plot.widths = c(0.5, 0.5),
-                           digits = 3, theme = ggplot2::theme_get(),
-                           header = NULL, row.names.y = NULL,
-                           return_ggplots = FALSE) {
-    if (length(plot.widths) != 2 || signif(sum(plot.widths), 3) != 1)
-        stop("plot.widths should be a vector with 2 elements that sum to 1")
+}
 
-    oddstable <- orm.oddstable(summary_object)
 
-    if (is.null(row.names.y))
-        row.names.y <- rownames(oddstable)
+#' @export
+orm_summary.default<-function(x,...){
+    summary_obj<-rms:::summary.rms(x, ...)
+    #for plotting function to use the custom plot for orm
+    attr(summary_obj, "class") <- c("summary.orm", class(summary_obj))
+    return(summary_obj)
+}
 
-    tableplot <- plot.oddstable(oddstable, digits = digits, theme = theme,
-                                header = header, row.names.y = row.names.y)
 
-    tablegraph <- plot.orm.graph(oddstable, theme = theme, header = header,
-                                 row.names.y = row.names.y)
+#' Forest Plot of an orm model summary
+#'
+#' Convinience function to create a plot of the \code{\link[rms]{orm}}  model
+#' summary. For further customising the plots use \code{return_ggplots = TRUE}
+#' This will create 2 \code{ggplot2} objects that can be joined with the
+#' \code{\link{join_ggplots}} commands.
+#
+#'
+#' @inheritParams forestplot.default
+#' @inheritDotParams join_ggplots
+#' @inheritParams oddstable_graph
+#'
+#'
+#' @return Two \code{ggplot} plot objects or a \code{\link[gtable]{gtable}}
+#'
+#' @method summary orm
+#' @export
+"plot.summary.orm"<-function(summary_obj, return_ggplots = FALSE, ...,
+                             digits, theme, header, row.names.y){
+    UseMethod("forestplot")
+}
+
+
+#' Draw forestplot from an orm model summary
+#'
+#' Function to get aligned table and plot of the Odds ratio
+#'
+#'#' @param return_ggplots if \code{TRUE} the fuction returns 2 ggplot objects
+#'  in a list instead of drawing a tablegrid
+#' @param  summary_obj result of a \code{summary} command on
+#'  \code{\link[rms]{orm}}  model
+#' @inheritParams join_ggplots
+#' @inheritDotParams oddstable_graph
+#'
+#' @export
+forestplot.default <- function(summary_obj, return_ggplots = FALSE,
+                               plot.widths = c(0.5, 0.5),
+                               title = "Odds Ratio" , ...) {
+
+    oddstable <- oddstable(summary_obj)
+
+    tableplot <- oddstable_graph(oddstable, ...)
+
+    tablegraph <- orm_graph(oddstable, ...)
 
     if (return_ggplots) {
         return(list(tableplot, tablegraph))
 
     } else {
-        forestplot <- join.ggplots(tableplot, tablegraph, plot.widths)
-
+        forestplot <- join_ggplots(tableplot, tablegraph, ...)
+        grid::grid.newpage()
+        grid::grid.draw(forestplot)
         invisible(forestplot)
     }
 
@@ -30,7 +80,22 @@ orm.forestplot <- function(summary_object, plot.widths = c(0.5, 0.5),
 
 }
 
-join.ggplots <- function(leftplot, rightplot, plot.widths = c(0.5, 0.5)) {
+#' Join two ggplot objects side by side
+#'
+#' Function to get aligned table of two ggplot objects
+#'
+#' @param plot.widths the relative widths of the left and right plot
+#' should be a vector (\code{c()})  with 2 elements that sum to 1 defaults to
+#' equal widths
+#' @param title the tile row of the drawn plot
+#'
+#' @export
+join_ggplots <- function(leftplot, rightplot,
+                         plot.widths = c(0.5, 0.5),
+                         title = "Odds Ratio" , ...) {
+    if (length(plot.widths) != 2 || signif(sum(plot.widths), 3) != 1)
+        stop("plot.widths should be a vector with 2 elements that sum to 1")
+
     tablewidth <- grid::unit(c(plot.widths[1], plot.widths[2]), c("npc"))
     p1g <- ggplot2::ggplotGrob(leftplot)
     p2g <- ggplot2::ggplotGrob(rightplot)
@@ -40,14 +105,8 @@ join.ggplots <- function(leftplot, rightplot, plot.widths = c(0.5, 0.5)) {
 
     invisible(forestplot)
 }
-
-
-orm.oddstable <- function(x, ..., type = "plain", digits = 5,
-                          table.env = FALSE) {
-    switch(type, latex = rms:::latex.summary.rms(x, ..., file = "",
-                                                 table.env = table.env),
-           html = return(rms:::html.summary.rms(x, ...)),
-           plain = {
+#' Get row names from odd an values form even columns
+oddstable <- function(x) {
         if (nrow(x) %% 2 == 0) {
             cstats <- x[c(FALSE, TRUE), c(1:7)]
             dimnames(cstats) <- list(dimnames(x[c(TRUE, FALSE), ])[[1]],
@@ -57,13 +116,24 @@ orm.oddstable <- function(x, ..., type = "plain", digits = 5,
             stop("Aborting! The number of input rows is odd!")
         }
 
-
-    })
 }
 
-plot.oddstable <- function(x, digits = 3, theme = ggplot2::theme_get(),
-                           header = NULL, row.names.y = rownames(x)) {
+#' Make a ggplot table
+#'
+#' Function to get a ggplot table from a matrix
+#'
+#' @param digits the number of siginficants digits to display
+#' @param theme the desired ggplot2 theme
+#' @param header names of the table columns
+#' @param row.names.y new names for the variable rows
+#' @inheritDotParams ggplot2::theme
+#'
+oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
+                           header = NULL, row.names.y = NULL, ...) {
     columns <- c(4, 6, 7)
+
+    if (is.null(row.names.y))
+        row.names.y <- rownames(x)
 
     if (is.vector(header) && length(header) == length(columns)) {
         # keep the provided header
@@ -104,18 +174,31 @@ plot.oddstable <- function(x, digits = 3, theme = ggplot2::theme_get(),
         axis.text = theme$text,
         plot.margin = grid::unit(c(0, 0, 0, 0), "lines"))
 
+    tableplot <- tableplot + ggplot2::theme(...)
+
     invisible(tableplot)
 
 }
-
-plot.orm.graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
-                           row.names.y = rownames(x),
-                           ylab = "Odds ratio (95% CI)") {
+#' Make a ggplot figure
+#'
+#' Function to get a ggplot figure from a matrix x
+#'
+#' @param theme the desired ggplot2 theme
+#' @param header names of the table columns
+#' @param row.names.y new names for the variable rows
+#' @inheritDotParams ggplot2::theme
+#'
+orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
+                           row.names.y = NULL,
+                           ylab = "Odds ratio (95% CI)", ...) {
     # set the theme
     ggplot2::theme_set(theme)
 
     if (!is.data.frame(x))
         x <- as.data.frame(x)
+
+    if (is.null(row.names.y))
+        row.names.y <- rownames(x)
 
 
     if (!length(row.names.y) == nrow(x)) {
@@ -149,6 +232,9 @@ plot.orm.graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
                    text = ggplot2::element_text(size = 12),
                    axis.text = theme$text,
                    plot.margin = grid::unit(c(0, 0, 0, 0), "lines"))
+
+    #add theme elements from passed on objects
+    p <- p + ggplot2::theme(...)
 
     invisible(p)
 }

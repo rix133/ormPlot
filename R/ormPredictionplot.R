@@ -94,9 +94,27 @@ plot.orm <- function(x, xval, plot_cols = c(),
 
     plot_rows_str <- c()
     plot_cols_str <- c()
+    if(tryCatch(is.character(plot_cols), error = function(e) FALSE))
+    {plot_cols_str <- plot_cols}
+    else{
+        char_cols <- as.character(substitute(plot_cols))
+        if(is.name(substitute(plot_cols))) { plot_cols_str <- char_cols}
+        else if (is.call(substitute(plot_cols)) && char_cols[1] == "c" )
+        { plot_cols_str <- char_cols[-1]}
+        else  stop("Invalid plot_columns")
+    }
 
-    if(length(plot_cols) > 0)    plot_cols_str <- convert_arg(plot_cols)
-    if(length(plot_rows) > 0)    plot_rows_str <- convert_arg(plot_rows)
+
+    if(tryCatch(is.character(plot_rows), error = function(e) FALSE))
+    {plot_rows_str <- plot_rows}
+    else{
+        char_rows <- as.character(substitute(plot_rows))
+        if(is.name(substitute(plot_rows))) { plot_rows_str <- char_rows}
+        else if (is.call(substitute(plot_rows)) && char_rows[1] == "c" )
+        { plot_rows_str <- char_rows[-1]}
+        else  stop("Invalid plot_rows ")
+    }
+
 
     plot_cols <- do.call(ggplot2::vars, lapply(plot_cols_str, as.name))
     plot_rows <- do.call(ggplot2::vars, lapply(plot_rows_str, as.name))

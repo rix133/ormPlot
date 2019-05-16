@@ -11,9 +11,10 @@
 #' @seealso \code{\link[rms]{Predict}}
 #' @export
 orm.predict_with_ci <- function(x, ..., np = 100,
-                              fun = plogis,
+                              fun = stats::plogis,
                               conf.int = 0.95,
                               boot.type = "bca") {
+
     pred_frame <- rms::Predict(x, ..., type = "model.frame", np = np)
     items <- nrow(pred_frame)
     last_pred <- data.frame(yhat = rep(0, items),
@@ -57,45 +58,59 @@ orm.predict_with_ci <- function(x, ..., np = 100,
 
 #' Plot the prediction with coeficent intervals
 #'
+#' This fuction plots the model predictions given that all variables that are
+#' not included in the plot are kept constant. Hence it requres at least one
+#' variable to produce a plot.
 #' returns a \code{ggplot} object that can be further customized like any
 #' other ggplot
 #
 #'
 #' @inheritParams orm.predict_with_ci
+#' @param xval The model value plotted on the x axis
 #' @param xlab A custom x-axis value (if specified)
 #' @param ylab A custom y-axis value (if specified)
+#' @param plot_rows  A vector of strings with other model components that
+#'  should be plotted. These are put on rows.
+#' @param plot_cols A vector of strings with  other model components that
+#'  should be plotted. These are put on columns.
+#' @param facet_lables A  named list of new names for varaibles on rows and
+#'  columns
+#' @param lable_with_colname Should he variable name also be included on plot
+#' row and column names
+#'
 #'
 #'
 #' @return a \code{ggplot} plot object
 #'
 #' @seealso \code{\link[rms]{Predict}}
 #' @export
-plot.orm <- function(x, ..., plot_cols = NULL,
-                                   plot_rows = NULL,
-                                   label_with_colname = TRUE,
-                                   facet_lables = NULL,
-                                   xlab = NULL, ylab = NULL, np = 100,
-                                   fun = plogis, boot.type = "bca",
-                                   conf.int = 0.95) {
+plot.orm <- function(x, xval, plot_cols = c(),
+                     plot_rows = c(),
+                     label_with_colname = TRUE,
+                     facet_lables = NULL,
+                     xlab = NULL, ylab = NULL, np = 100,
+                     fun = stats::plogis, boot.type = "bca",
+                     conf.int = 0.95) {
 
-    if (is.null(plot_cols) && is.null(plot_rows)) {
-        vars <- ggplot2::vars(...)
-        if (length(vars) > 1) {
-            plot_cols <- vars[2]
-        }
-        if (length(vars) > 2) {
-            plot_rows <- vars[3:length(vars)]
-        }
+    plot_rows_str <- c()
+    plot_cols_str <- c()
 
-    } else {
-        plot_cols <- do.call(ggplot2::vars, lapply(plot_cols, as.name))
-        plot_rows <- do.call(ggplot2::vars, lapply(plot_rows, as.name))
-    }
+    if(length(plot_cols) > 0)    plot_cols_str <- convert_arg(plot_cols)
+    if(length(plot_rows) > 0)    plot_rows_str <- convert_arg(plot_rows)
 
-    res <- orm.predict_with_ci(x, ... , fun = fun,
-                             boot.type = boot.type,
-                             conf.int = conf.int)
-    x <- deparse(substitute(...))
+    plot_cols <- do.call(ggplot2::vars, lapply(plot_cols_str, as.name))
+    plot_rows <- do.call(ggplot2::vars, lapply(plot_rows_str, as.name))
+
+
+    new_args<-c(substitute(xval), plot_cols_str, plot_rows_str)
+
+    res <- do.call(orm.predict_with_ci,c(list(x=x),
+                                         as.list(new_args),
+                                         list(fun = fun,
+                                         boot.type = boot.type,
+                                         conf.int = conf.int)))
+
+
     if (!is.null(facet_lables) && is.list(facet_lables)) {
         label_with_colname <- FALSE
         for (i in 1:length(facet_lables)) {
@@ -111,9 +126,10 @@ plot.orm <- function(x, ..., plot_cols = NULL,
 
     # set what data to draw and where/how i.e. cran residSD in x etc.
     pred_plot <- ggplot2::ggplot(res,
-                                 ggplot2::aes_string(x = x,
-                                                     y = "Propability",
-                                                     color = "dependent")) +
+                                 ggplot2::aes_string(
+                                     x = as.character(substitute(xval)),
+                                     y = "Propability",
+                                     color = "dependent")) +
     # add the lines
     ggplot2::geom_line(size = 1) +
     # add the coefidence intervals
@@ -141,4 +157,25 @@ plot.orm <- function(x, ..., plot_cols = NULL,
     # show the plot
     pred_plot
 
+}
+
+#' Function to convert any input to string vector
+convert_arg<-function(x){
+
+    sx <- substitute(x)
+    a <- tryCatch(is.character(x), error = function(e) FALSE)
+    if (a) {
+        new_x <- x
+    } else {
+        cx <- as.character(sx)
+        if (is.name(sx)) {
+            new_x <- cx
+        } else if (is.call(sx) && cx[1] == "c") {
+            new_x <- cx[-1]
+        } else {
+            stop("Invalid column or row names")
+        }
+    }
+
+    invisible(c(new_x))
 }

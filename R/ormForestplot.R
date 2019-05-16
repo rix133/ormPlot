@@ -92,6 +92,9 @@ forestplot.default <- function(object, return_ggplots = FALSE,
 #'
 #' Function to get aligned table of two ggplot objects
 #'
+#'
+#' @param leftplot the left side plot
+#' @param rightplot the plot on th right
 #' @param plot.widths the relative widths of the left and right plot
 #' should be a vector (\code{c()})  with 2 elements that sum to 1 defaults to
 #' equal widths
@@ -100,7 +103,7 @@ forestplot.default <- function(object, return_ggplots = FALSE,
 #' @export
 join_ggplots <- function(leftplot, rightplot,
                          plot.widths = c(0.5, 0.5),
-                         title = "Odds Ratio" , ...) {
+                         title = "Odds Ratio") {
     if (length(plot.widths) != 2 || signif(sum(plot.widths), 3) != 1)
         stop("plot.widths should be a vector with 2 elements that sum to 1")
 

@@ -4,8 +4,8 @@
 \alias{orm.predict_with_ci}
 \title{Create a Prediction data.frame with coeficent intervals}
 \usage{
-orm.predict_with_ci(x, ..., np = 100, fun = plogis, conf.int = 0.95,
-  boot.type = "bca")
+orm.predict_with_ci(x, ..., np = 100, fun = stats::plogis,
+  conf.int = 0.95, boot.type = "bca")
 }
 \arguments{
 \item{x}{

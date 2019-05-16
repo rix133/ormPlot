@@ -5,9 +5,13 @@
 \title{Join two ggplot objects side by side}
 \usage{
 join_ggplots(leftplot, rightplot, plot.widths = c(0.5, 0.5),
-  title = "Odds Ratio", ...)
+  title = "Odds Ratio")
 }
 \arguments{
+\item{leftplot}{the left side plot}
+
+\item{rightplot}{the plot on th right}
+
 \item{plot.widths}{the relative widths of the left and right plot
 should be a vector (\code{c()})  with 2 elements that sum to 1 defaults to
 equal widths}

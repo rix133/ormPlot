@@ -16,6 +16,8 @@ in a list instead of drawing a tablegrid}
 
 \item{...}{Arguments passed on to \code{join_ggplots}
 \describe{
+  \item{leftplot}{the left side plot}
+  \item{rightplot}{the plot on th right}
   \item{plot.widths}{the relative widths of the left and right plot
 should be a vector (\code{c()})  with 2 elements that sum to 1 defaults to
 equal widths}

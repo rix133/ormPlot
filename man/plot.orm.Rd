@@ -4,9 +4,9 @@
 \alias{plot.orm}
 \title{Plot the prediction with coeficent intervals}
 \usage{
-\method{plot}{orm}(x, ..., plot_cols = NULL, plot_rows = NULL,
+\method{plot}{orm}(x, xval, plot_cols = c(), plot_rows = c(),
   label_with_colname = TRUE, facet_lables = NULL, xlab = NULL,
-  ylab = NULL, np = 100, fun = plogis, boot.type = "bca",
+  ylab = NULL, np = 100, fun = stats::plogis, boot.type = "bca",
   conf.int = 0.95)
 }
 \arguments{
@@ -16,33 +16,16 @@
 	\code{d} was created by \code{datadist}), or 
 	it must have been in effect when the the model was fitted.}
 
-\item{...}{
-	One or more variables to vary, or single-valued adjustment values.
-	Specify a variable name without an equal sign to use the default
-	display range, or any range 
-	you choose (e.g. \code{seq(0,100,by=2),c(2,3,7,14)}). 
-	The default list of values for which predictions are made
-	is taken as the list of unique values of the variable if they number fewer
-	than 11. For variables with \eqn{>10} unique values, \code{np}
-	equally spaced values in the range are used for plotting if the
-	range is not specified.  Variables not specified are set to the default
-	adjustment value \code{limits[2]}, i.e. the median for continuous
-	variables and a reference category for 	non-continuous ones.
-	Later variables define adjustment settings.
-	For categorical variables, specify the class labels in quotes when
-	specifying variable values.  If the levels of a categorical variable
-	are numeric, you may omit the quotes.  For variables not described
-	using \code{datadist}, you must specify explicit ranges and
-	adjustment settings for predictors  that were in the model.
-	If no variables are specified in \dots, predictions will be made by
-	separately varying all predictors in the model over their default
-	range, holding the other predictors at their adjustment values.
-	This has the same effect as specifying \code{name} as a vector
-	containing all the predictors.  For \code{rbind}, \dots represents a
-	series of results from \code{Predict}.  If you name the results,
-	these names will be taken as the values of the new \code{.set.}
-	variable added to the concatenated data frames.  See an example below.
-  }
+\item{xval}{The model value plotted on the x axis}
+
+\item{plot_cols}{A vector of strings with  other model components that
+should be plotted. These are put on columns.}
+
+\item{plot_rows}{A vector of strings with other model components that
+should be plotted. These are put on rows.}
+
+\item{facet_lables}{A  named list of new names for varaibles on rows and
+columns}
 
 \item{xlab}{A custom x-axis value (if specified)}
 
@@ -67,11 +50,17 @@
 
 \item{conf.int}{
 	confidence level.  Default is 0.95.  Specify \code{FALSE} to suppress.}
+
+\item{lable_with_colname}{Should he variable name also be included on plot
+row and column names}
 }
 \value{
 a \code{ggplot} plot object
 }
 \description{
+This fuction plots the model predictions given that all variables that are
+not included in the plot are kept constant. Hence it requres at least one
+variable to produce a plot.
 returns a \code{ggplot} object that can be further customized like any
 other ggplot
 }

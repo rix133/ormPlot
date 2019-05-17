@@ -73,10 +73,11 @@ orm.predict_with_ci <- function(x, ..., np = 100,
 #'  should be plotted. These are put on rows.
 #' @param plot_cols A vector of strings with  other model components that
 #'  should be plotted. These are put on columns.
-#' @param facet_lables A  named list of new names for varaibles on rows and
+#' @param facet_labels A  named list of new names for varaibles on rows and
 #'  columns
-#' @param lable_with_colname Should he variable name also be included on plot
+#' @param label_with_colname Should he variable name also be included on plot
 #' row and column names
+#' @param ... additional paremeters taht will be passed to \code{\link[rms]{Predict}}
 #'
 #'
 #'
@@ -87,10 +88,10 @@ orm.predict_with_ci <- function(x, ..., np = 100,
 plot.orm <- function(x, xval, plot_cols = c(),
                      plot_rows = c(),
                      label_with_colname = TRUE,
-                     facet_lables = NULL,
+                     facet_labels = NULL,
                      xlab = NULL, ylab = NULL, np = 100,
                      fun = stats::plogis, boot.type = "bca",
-                     conf.int = 0.95) {
+                     conf.int = 0.95, ...) {
 
     plot_rows_str <- c()
     plot_cols_str <- c()
@@ -120,7 +121,7 @@ plot.orm <- function(x, xval, plot_cols = c(),
     plot_rows <- do.call(ggplot2::vars, lapply(plot_rows_str, as.name))
 
 
-    new_args<-c(substitute(xval), plot_cols_str, plot_rows_str)
+    new_args<-c(substitute(xval), plot_cols_str, plot_rows_str, list(...))
 
     res <- do.call(orm.predict_with_ci,c(list(x=x),
                                          as.list(new_args),
@@ -129,14 +130,14 @@ plot.orm <- function(x, xval, plot_cols = c(),
                                          conf.int = conf.int)))
 
 
-    if (!is.null(facet_lables) && is.list(facet_lables)) {
+    if (!is.null(facet_labels) && is.list(facet_labels)) {
         label_with_colname <- FALSE
-        for (i in 1:length(facet_lables)) {
-            levels(res[, names(facet_lables[i])]) <- facet_lables[[i]]
+        for (i in 1:length(facet_labels)) {
+            levels(res[, names(facet_labels[i])]) <- facet_labels[[i]]
         }
     }
 
-    facet_labler <- function(with_colname) {
+    facet_labelr <- function(with_colname) {
         if (with_colname)
             return(ggplot2::label_both) else return(ggplot2::label_value)
     }
@@ -159,7 +160,7 @@ plot.orm <- function(x, xval, plot_cols = c(),
     # plot by Rural sex and max_SEP_3
     ggplot2::facet_grid(rows = plot_rows,
                         cols = plot_cols,
-                        labeller = facet_labler(label_with_colname)) +
+                        labeller = facet_labelr(label_with_colname)) +
     ggplot2::theme_bw() +
     # set the theme values
     ggplot2::theme(text = ggplot2::element_text(size = 12),
@@ -178,6 +179,9 @@ plot.orm <- function(x, xval, plot_cols = c(),
 }
 
 #' Function to convert any input to string vector
+#'
+#' @param x string, object name or vector of theese
+#' @return vector of strings
 convert_arg<-function(x){
 
     sx <- substitute(x)

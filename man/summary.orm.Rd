@@ -2,9 +2,17 @@
 % Please edit documentation in R/ormForestplot.R
 \name{summary.orm}
 \alias{summary.orm}
+\alias{orm_summary.default}
 \title{Get an extended rms summary object}
 \usage{
 \method{summary}{orm}(object, ...)
+
+orm_summary.default(object, ...)
+}
+\arguments{
+\item{object}{a \code{\link[rms]{orm}}  model object}
+
+\item{...}{parameters passed to \code{\link[rms]{summary.rms}}}
 }
 \description{
 This fuctions adds a \code{summary.orm} class attribute to a

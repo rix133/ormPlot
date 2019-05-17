@@ -15,7 +15,7 @@
 #' See exported methods for more details:
 #' \itemize{
 #' \item \code{\link{plot.summary.orm}}
-#' \item \code{\link{forestplot.default}}
+#' \item \code{\link{forestplot}}
 #' \item \code{\link{join_ggplots}}
 #' }
 #'

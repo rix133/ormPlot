@@ -5,9 +5,9 @@
 \title{Plot the prediction with coeficent intervals}
 \usage{
 \method{plot}{orm}(x, xval, plot_cols = c(), plot_rows = c(),
-  label_with_colname = TRUE, facet_lables = NULL, xlab = NULL,
+  label_with_colname = TRUE, facet_labels = NULL, xlab = NULL,
   ylab = NULL, np = 100, fun = stats::plogis, boot.type = "bca",
-  conf.int = 0.95)
+  conf.int = 0.95, ...)
 }
 \arguments{
 \item{x}{
@@ -24,7 +24,10 @@ should be plotted. These are put on columns.}
 \item{plot_rows}{A vector of strings with other model components that
 should be plotted. These are put on rows.}
 
-\item{facet_lables}{A  named list of new names for varaibles on rows and
+\item{label_with_colname}{Should he variable name also be included on plot
+row and column names}
+
+\item{facet_labels}{A  named list of new names for varaibles on rows and
 columns}
 
 \item{xlab}{A custom x-axis value (if specified)}
@@ -51,8 +54,7 @@ columns}
 \item{conf.int}{
 	confidence level.  Default is 0.95.  Specify \code{FALSE} to suppress.}
 
-\item{lable_with_colname}{Should he variable name also be included on plot
-row and column names}
+\item{...}{additional paremeters taht will be passed to \code{\link[rms]{Predict}}}
 }
 \value{
 a \code{ggplot} plot object

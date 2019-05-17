@@ -2,38 +2,16 @@
 % Please edit documentation in R/ormForestplot.R
 \name{plot.summary.orm}
 \alias{plot.summary.orm}
+\alias{plot}
 \title{Forest Plot of an orm model summary}
 \usage{
-\method{summary}{orm}(object, return_ggplots = FALSE, ..., digits, theme,
-  header, row.names.y)
+\method{plot}{summary.orm}(x, ...)
 }
 \arguments{
-\item{object}{result of a \code{summary} command on
-\code{\link[rms]{orm}}  model}
+\item{x}{result of a \code{summary} command on
+\code{\link[rms]{orm}}  model ie a summary.orm class object}
 
-\item{return_ggplots}{if \code{TRUE} the fuction returns 2 ggplot objects
-in a list instead of drawing a tablegrid}
-
-\item{...}{Arguments passed on to \code{join_ggplots}
-\describe{
-  \item{leftplot}{the left side plot}
-  \item{rightplot}{the plot on th right}
-  \item{plot.widths}{the relative widths of the left and right plot
-should be a vector (\code{c()})  with 2 elements that sum to 1 defaults to
-equal widths}
-  \item{title}{the tile row of the drawn plot}
-}}
-
-\item{digits}{the number of siginficants digits to display}
-
-\item{theme}{the desired ggplot2 theme}
-
-\item{header}{names of the table columns}
-
-\item{row.names.y}{new names for the variable rows}
-}
-\value{
-Two \code{ggplot} plot objects or a \code{\link[gtable]{gtable}}
+\item{...}{paremeters passed to \code{\link{forestplot}}}
 }
 \description{
 Convinience function to create a plot of the \code{\link[rms]{orm}}  model

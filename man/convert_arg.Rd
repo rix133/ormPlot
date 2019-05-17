@@ -6,6 +6,12 @@
 \usage{
 convert_arg(x)
 }
+\arguments{
+\item{x}{string, object name or vector of theese}
+}
+\value{
+vector of strings
+}
 \description{
 Function to convert any input to string vector
 }

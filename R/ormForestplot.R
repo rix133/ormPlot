@@ -4,8 +4,9 @@
 #' \code{summary.rms} output to facilitate the automatic plotting
 #'  of orm summary into a ggplot forestplot
 #'
-#' @inheritParams orm_summary.default
-#'
+#' @param object a \code{\link[rms]{orm}}  model object
+#' @param ... parameters passed to \code{\link[rms]{summary.rms}}
+#' @aliases summary.orm
 #' @method summary orm
 #' @export
 "summary.orm"<-function(object, ...){
@@ -13,20 +14,29 @@
 
 }
 
-#' Get an extended rms summary object
-#'
-#' This fuctions adds a \code{summary.orm} class attribute to a
-#' \code{summary.rms} output to facilitate the automatic plotting
-#'  of orm summary into a ggplot forestplot
-#'
-#'  @param object a \code{\link[rms]{orm}}  model object
-#'
-#' @export
+
+#' @rdname summary.orm
 orm_summary.default<-function(object,...){
     summary_obj<-rms:::summary.rms(object, ...)
     #for plotting function to use the custom plot for orm
     attr(summary_obj, "class") <- c("summary.orm", class(summary_obj))
     return(summary_obj)
+}
+
+#' Forest Plot of an orm model summary
+#'
+#' Convinience function to create a plot of the \code{\link[rms]{orm}}  model
+#' summary. For further customising the plots use \code{return_ggplots = TRUE}
+#' This will create 2 \code{ggplot2} objects that can be joined with the
+#' \code{\link{join_ggplots}} commands.
+#'
+#' @inheritParams forestplot
+#' @param ... paremeters passed to \code{\link{forestplot}}
+#' @method plot summary.orm
+#' @export
+#' @aliases plot
+"plot.summary.orm"<-function(x, ...){
+    UseMethod("forestplot")
 }
 
 
@@ -36,39 +46,19 @@ orm_summary.default<-function(object,...){
 #' summary. For further customising the plots use \code{return_ggplots = TRUE}
 #' This will create 2 \code{ggplot2} objects that can be joined with the
 #' \code{\link{join_ggplots}} commands.
-#
-#'
-#' @inheritParams forestplot.default
-#' @inheritDotParams join_ggplots
-#' @inheritParams oddstable_graph
-#'
-#'
-#' @return Two \code{ggplot} plot objects or a \code{\link[gtable]{gtable}}
-#'
-#' @method summary orm
-#' @export
-"plot.summary.orm"<-function(object, return_ggplots = FALSE, ...,
-                             digits, theme, header, row.names.y){
-    UseMethod("forestplot")
-}
-
-
-#' Draw forestplot from an orm model summary
-#'
-#' Function to get aligned table and plot of the Odds ratio
 #'
 #' @param return_ggplots if \code{TRUE} the fuction returns 2 ggplot objects
 #'  in a list instead of drawing a tablegrid
-#' @param  object result of a \code{summary} command on
-#'  \code{\link[rms]{orm}}  model
+#' @param  x result of a \code{summary} command on
+#'  \code{\link[rms]{orm}}  model ie a summary.orm class object
 #' @inheritParams join_ggplots
 #' @inheritDotParams oddstable_graph
-#'
-forestplot.default <- function(object, return_ggplots = FALSE,
+#' @aliases forestplot.orm
+forestplot <- function(x, return_ggplots = FALSE,
                                plot.widths = c(0.5, 0.5),
                                title = "Odds Ratio" , ...) {
 
-    oddstable <- oddstable(object)
+    oddstable <- oddstable(x)
 
     tableplot <- oddstable_graph(oddstable, ...)
 
@@ -94,7 +84,7 @@ forestplot.default <- function(object, return_ggplots = FALSE,
 #'
 #'
 #' @param leftplot the left side plot
-#' @param rightplot the plot on th right
+#' @param rightplot the plot on the right
 #' @param plot.widths the relative widths of the left and right plot
 #' should be a vector (\code{c()})  with 2 elements that sum to 1 defaults to
 #' equal widths

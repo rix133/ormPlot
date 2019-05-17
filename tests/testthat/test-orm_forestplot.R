@@ -4,8 +4,10 @@ test_data_001<-readRDS("../testdata/test_data_001.rds")
 
 test_that("Plotting returns an aligned forestplot",{
   p <- forestplot(test_data_001)
-  #vdiffr::expect_doppelganger("forestplot_full",grid::grid.draw(p, recording = FALSE))
-  #test not passing for an unknwon reason drawing it instead for visual inspection
+  #vdiffr::expect_doppelganger("forestplot_full",grid::grid.draw(p))
+
+  #test not passing for an unknwon reason
+  #drawing it instead for visual inspection
   #ggplot2::ggsave("forestplot_full.svg",p)
 
 

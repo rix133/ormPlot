@@ -51,7 +51,7 @@
   </clipPath>
 </defs>
 <polyline points='91.21,32.02 720.00,32.02 ' style='stroke-width: 0.75;' clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)' />
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='195.13' y='27.09' style='font-size: 11.00px; font-family: Liberation Sans;' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>Effect</text></g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='199.63' y='27.09' style='font-size: 11.00px; font-family: Liberation Sans;' textLength='18.97px' lengthAdjust='spacingAndGlyphs'>Est.</text></g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='378.37' y='27.09' style='font-size: 11.00px; font-family: Liberation Sans;' textLength='54.47px' lengthAdjust='spacingAndGlyphs'>Lower 0.95</text></g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='574.87' y='27.09' style='font-size: 11.00px; font-family: Liberation Sans;' textLength='54.47px' lengthAdjust='spacingAndGlyphs'>Upper 0.95</text></g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='0.00' y='544.30' style='font-size: 11.00px; font-family: Liberation Sans;' textLength='86.28px' lengthAdjust='spacingAndGlyphs'>max_SEP_3 - 3:1</text></g>

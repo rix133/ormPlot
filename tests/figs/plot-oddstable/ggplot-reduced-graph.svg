@@ -41,7 +41,7 @@
   </clipPath>
 </defs>
 <polyline points='63.06,32.02 720.00,32.02 ' style='stroke-width: 0.75;' clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)' />
-<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='172.26' y='27.09' style='font-size: 11.00px; font-family: Liberation Sans;' textLength='27.95px' lengthAdjust='spacingAndGlyphs'>Effect</text></g>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='176.75' y='27.09' style='font-size: 11.00px; font-family: Liberation Sans;' textLength='18.97px' lengthAdjust='spacingAndGlyphs'>Est.</text></g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='364.29' y='27.09' style='font-size: 11.00px; font-family: Liberation Sans;' textLength='54.47px' lengthAdjust='spacingAndGlyphs'>Lower 0.95</text></g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='569.59' y='27.09' style='font-size: 11.00px; font-family: Liberation Sans;' textLength='54.47px' lengthAdjust='spacingAndGlyphs'>Upper 0.95</text></g>
 <g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='0.00' y='527.14' style='font-size: 11.00px; font-family: Liberation Sans;' textLength='58.12px' lengthAdjust='spacingAndGlyphs'> Odds Ratio</text></g>

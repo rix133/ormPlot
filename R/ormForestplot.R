@@ -69,8 +69,6 @@ forestplot <- function(x, return_ggplots = FALSE,
 
     } else {
         forestplot <- join_ggplots(tableplot, tablegraph, ...)
-        grid::grid.newpage()
-        grid::grid.draw(forestplot)
         invisible(forestplot)
     }
 
@@ -103,12 +101,13 @@ join_ggplots <- function(leftplot, rightplot,
         stop("plot.widths should be a vector with 2 elements that sum to 1")
 
     tablewidth <- grid::unit(c(plot.widths[1], plot.widths[2]), c("npc"))
-    p1g <- ggplot2::ggplotGrob(leftplot)
-    p2g <- ggplot2::ggplotGrob(rightplot)
+    p1g <- ggplot2::ggplotGrob(leftplot + ggplot2::labs(subtitle = ""))
+    p2g <- ggplot2::ggplotGrob(rightplot + ggplot2::labs(subtitle = title))
     forestplot <- gtable::gtable_row("forestplot", list(p1g, p2g),
                                      widths = tablewidth,
                                      height = grid::unit(1, "npc"))
-
+    grid::grid.newpage()
+    grid::grid.draw(forestplot)
     invisible(forestplot)
 }
 #' Get row names from odd an values form even columns
@@ -147,6 +146,8 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
         # keep the provided header
     } else {
         header <- colnames(x[, columns])
+        #rename the first
+        header[1] <- "Est."
     }
     # setting the theme from the function
     ggplot2::theme_set(theme)

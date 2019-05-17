@@ -152,10 +152,10 @@ plot.orm <- function(x, xval, plot_cols = c(),
     # add the lines
     ggplot2::geom_line(size = 1) +
     # add the coefidence intervals
-    ggplot2::geom_ribbon(ggplot2::aes(ymin = lower,
-                                      ymax = upper,
-                                      fill = dependent,
-                                      color = dependent),
+    ggplot2::geom_ribbon(ggplot2::aes_string(ymin = "lower",
+                                      ymax = "upper",
+                                      fill = "dependent",
+                                      color = "dependent"),
                          alpha = 0.4, linetype = 0) +
     # plot by Rural sex and max_SEP_3
     ggplot2::facet_grid(rows = plot_rows,

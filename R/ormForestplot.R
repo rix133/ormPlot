@@ -78,6 +78,10 @@ forestplot <- function(x, return_ggplots = FALSE,
 
 }
 
+forestplot.default <- function(x, ...){
+    forestplot(x, ...)
+}
+
 #' Join two ggplot objects side by side
 #'
 #' Function to get aligned table of two ggplot objects
@@ -206,12 +210,19 @@ orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
 
 
     if (!length(row.names.y) == nrow(x)) {
-        row.names.y <- rownames(x)
+        vars <- paste(rownames(x), collapse = "\", \"")
+        stop(paste("The provided variable names are not covering all options: ",
+                   vars))
+    }
+    if(is.null(header)){
+        header <- c(colnames(x)[4], colnames(x)[6], colnames(x)[7])
     }
 
-    p <- ggplot2::ggplot(x, ggplot2::aes(x = row.names.y, y = Effect,
-                                         ymin = `Lower 0.95`,
-                                         ymax = `Upper 0.95`)) +
+    colnames(x)<-make.names(colnames(x))
+    x$names <- row.names.y
+    p <- ggplot2::ggplot(x, ggplot2::aes_string(x = "names", y = "Effect",
+                                         ymin = "Lower.0.95",
+                                         ymax = "Upper.0.95")) +
         ggplot2::geom_pointrange() +
     # add a dotted line at x=1 after flip
     ggplot2::geom_hline(yintercept = 1, lty = 2) +

@@ -3,10 +3,13 @@
 \name{forestplot}
 \alias{forestplot}
 \alias{forestplot.orm}
+\alias{forestplot.default}
 \title{Forest Plot of an orm model summary}
 \usage{
 forestplot(x, return_ggplots = FALSE, plot.widths = c(0.5, 0.5),
   title = "Odds Ratio", ...)
+
+forestplot.default(x, ...)
 }
 \arguments{
 \item{x}{result of a \code{summary} command on

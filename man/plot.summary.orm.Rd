@@ -2,7 +2,6 @@
 % Please edit documentation in R/ormForestplot.R
 \name{plot.summary.orm}
 \alias{plot.summary.orm}
-\alias{plot}
 \title{Forest Plot of an orm model summary}
 \usage{
 \method{plot}{summary.orm}(x, ...)

@@ -14,8 +14,8 @@
 
 }
 
-
 #' @rdname summary.orm
+#' @export
 orm_summary.default<-function(object,...){
     summary_obj<-rms:::summary.rms(object, ...)
     #for plotting function to use the custom plot for orm
@@ -34,7 +34,6 @@ orm_summary.default<-function(object,...){
 #' @param ... paremeters passed to \code{\link{forestplot}}
 #' @method plot summary.orm
 #' @export
-#' @aliases plot
 "plot.summary.orm"<-function(x, ...){
     UseMethod("forestplot")
 }
@@ -54,6 +53,7 @@ orm_summary.default<-function(object,...){
 #' @inheritParams join_ggplots
 #' @inheritDotParams oddstable_graph
 #' @aliases forestplot.orm
+#' @export
 forestplot <- function(x, return_ggplots = FALSE,
                                plot.widths = c(0.5, 0.5),
                                title = "Odds Ratio" , ...) {
@@ -77,7 +77,8 @@ forestplot <- function(x, return_ggplots = FALSE,
 
 
 }
-
+#' @rdname forestplot
+#' @export
 forestplot.default <- function(x, ...){
     forestplot(x, ...)
 }

@@ -149,22 +149,31 @@ plot.orm <- function(x, xval, plot_cols = c(),
                                      x = as.character(substitute(xval)),
                                      y = "Propability",
                                      color = "dependent")) +
-    # add the lines
-    ggplot2::geom_line(size = 1) +
-    # add the coefidence intervals
-    ggplot2::geom_ribbon(ggplot2::aes_string(ymin = "lower",
-                                      ymax = "upper",
-                                      fill = "dependent",
-                                      color = "dependent"),
-                         alpha = 0.4, linetype = 0) +
-    # plot by Rural sex and max_SEP_3
-    ggplot2::facet_grid(rows = plot_rows,
-                        cols = plot_cols,
-                        labeller = facet_labelr(label_with_colname)) +
-    ggplot2::theme_bw() +
-    # set the theme values
-    ggplot2::theme(text = ggplot2::element_text(size = 12),
-                   axis.text = ggplot2::theme_get()$text)
+        # add the lines
+        ggplot2::geom_line(size = 1) +
+        # add the coefidence intervals
+        ggplot2::geom_ribbon(ggplot2::aes_string(ymin = "lower",
+                                                 ymax = "upper",
+                                                 fill = "dependent",
+                                                 color = "dependent"),
+                             alpha = 0.4, linetype = 0)
+
+    #use the facet
+    if(length(plot_rows)>0 || length(plot_cols)>0){
+
+        pred_plot <- pred_plot +  ggplot2::facet_grid(
+            rows = plot_rows,
+            cols = plot_cols,
+            labeller = facet_labelr(label_with_colname))
+    }
+
+
+    pred_plot <- pred_plot +
+
+        ggplot2::theme_bw() +
+        # set the theme values
+        ggplot2::theme(text = ggplot2::element_text(size = 12),
+                       axis.text = ggplot2::theme_get()$text)
 
     if (!is.null(xlab)) {
         pred_plot <- pred_plot + ggplot2::xlab(xlab)

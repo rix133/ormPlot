@@ -20,4 +20,11 @@ test_that("aborts when new row names are not the same length", {
                "The provided variable names are not covering all options:*")
 })
 
+test_that("plotting test data can handle modified column names", {
+  colnames(test_data_001)<-c("a","b","c","d","e","f","g","h")
+  p <- orm_graph(test_data_001[1:6,])
+  expect_true(ggplot2::is.ggplot(p))
+  vdiffr::expect_doppelganger("ggplot_letters_orm_graph", p)
+})
+
 

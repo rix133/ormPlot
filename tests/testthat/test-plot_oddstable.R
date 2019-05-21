@@ -32,5 +32,13 @@ test_that("plotting test data scales correctly", {
 })
 
 
+test_that("plotting test data can handle modified column names", {
+  colnames(test_data_001)<-c("a","b","c","d","e","f","g","h")
+  p <- oddstable_graph(test_data_001[1:6,])
+  expect_true(ggplot2::is.ggplot(p))
+  vdiffr::expect_doppelganger("ggplot_nr_graph", p)
+})
+
+
 
 

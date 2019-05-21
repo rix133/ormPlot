@@ -22,9 +22,8 @@ test_that("Plotting produces 2 ggplots",{
   vdiffr::expect_doppelganger("forestplot_right",p[[2]])
 })
 
-test_that("Plotting returns a grob",{
-  p <- forestplot(test_data_001, return_ggplots = TRUE)
-  p <- join_ggplots(p[[1]],p[[2]])
+test_that("grob is returned if y values are specified",{
+  p <- forestplot(test_data_001[1:4,], row.names.y = c("sons", "odds 1"))
 
   expect_true(grid::is.grob(p))
 

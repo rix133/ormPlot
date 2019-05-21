@@ -222,9 +222,13 @@ orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
 
     colnames(x)<-make.names(colnames(x))
     x$names <- row.names.y
-    p <- ggplot2::ggplot(x, ggplot2::aes_string(x = "names", y = "Effect",
-                                         ymin = "Lower.0.95",
-                                         ymax = "Upper.0.95")) +
+    effect_val <- as.character(colnames(x)[4])
+    lower_val <- as.character(colnames(x)[6])
+    upper_val <- as.character(colnames(x)[7])
+    p <- ggplot2::ggplot(x, ggplot2::aes_string(x = "names",
+                                                y = eval(effect_val),
+                                         ymin = eval(lower_val),
+                                         ymax = eval(upper_val))) +
         ggplot2::geom_pointrange() +
     # add a dotted line at x=1 after flip
     ggplot2::geom_hline(yintercept = 1, lty = 2) +

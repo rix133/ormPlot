@@ -68,7 +68,7 @@ forestplot <- function(x, return_ggplots = FALSE,
         return(list(tableplot, tablegraph))
 
     } else {
-        forestplot <- join_ggplots(tableplot, tablegraph, ...)
+        forestplot <- join_ggplots(tableplot, tablegraph, plot.widths, title)
         invisible(forestplot)
     }
 

@@ -3,8 +3,9 @@
 \name{forestplot}
 \alias{forestplot}
 \alias{forestplot.orm}
+\alias{forestplot.lrm}
 \alias{forestplot.default}
-\title{Forest Plot of an orm model summary}
+\title{Forest Plot of an rms model summary}
 \usage{
 forestplot(x, return_ggplots = FALSE, plot.widths = c(0.5, 0.5),
   title = "Odds Ratio", ...)

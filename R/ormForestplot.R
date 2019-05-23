@@ -1,45 +1,21 @@
-#' Get an extended rms summary object
+#' Forest Plot of an rms model summary
 #'
-#' This fuctions adds a \code{summary.orm} class attribute to a
-#' \code{summary.rms} output to facilitate the automatic plotting
-#'  of orm summary into a ggplot forestplot
-#'
-#' @param object a \code{\link[rms]{orm}}  model object
-#' @param ... parameters passed to \code{\link[rms]{summary.rms}}
-#' @aliases summary.orm
-#' @method summary orm
-#' @export
-"summary.orm"<-function(object, ...){
-    UseMethod("orm_summary")
-
-}
-
-#' @rdname summary.orm
-#' @export
-orm_summary.default<-function(object,...){
-    summary_obj<-rms:::summary.rms(object, ...)
-    #for plotting function to use the custom plot for orm
-    attr(summary_obj, "class") <- c("summary.orm", class(summary_obj))
-    return(summary_obj)
-}
-
-#' Forest Plot of an orm model summary
-#'
-#' Convinience function to create a plot of the \code{\link[rms]{orm}}  model
-#' summary. For further customising the plots use \code{return_ggplots = TRUE}
+#' Convinience function to create a plot of the \code{\link[rms]{orm}} or
+#' \code{\link[rms]{lrm}} model summary. For further customising the plots
+#'  use \code{return_ggplots = TRUE}
 #' This will create 2 \code{ggplot2} objects that can be joined with the
 #' \code{\link{join_ggplots}} commands.
 #'
+#' @inheritDotParams forestplot
 #' @inheritParams forestplot
-#' @param ... paremeters passed to \code{\link{forestplot}}
-#' @method plot summary.orm
+#' @method plot summary.rms
 #' @export
-"plot.summary.orm"<-function(x, ...){
+"plot.summary.rms"<-function(x, ...){
     UseMethod("forestplot")
 }
 
 
-#' Forest Plot of an orm model summary
+#' Forest Plot of an rms model summary
 #'
 #' Convinience function to create a plot of the \code{\link[rms]{orm}}  model
 #' summary. For further customising the plots use \code{return_ggplots = TRUE}
@@ -52,7 +28,7 @@ orm_summary.default<-function(object,...){
 #'  \code{\link[rms]{orm}}  model ie a summary.orm class object
 #' @inheritParams join_ggplots
 #' @inheritDotParams oddstable_graph
-#' @aliases forestplot.orm
+#' @aliases forestplot.orm forestplot.lrm
 #' @export
 forestplot <- function(x, return_ggplots = FALSE,
                                plot.widths = c(0.5, 0.5),
@@ -114,9 +90,9 @@ join_ggplots <- function(leftplot, rightplot,
 #' @param x a \code{maxtrix} with even number of rows
 oddstable <- function(x) {
         if (nrow(x) %% 2 == 0) {
-            cstats <- x[c(FALSE, TRUE), c(1:7)]
+            cstats <- x[c(FALSE, TRUE), c(1:ncol(x))]
             dimnames(cstats) <- list(dimnames(x[c(TRUE, FALSE), ])[[1]],
-                                     dimnames(x)[[2]][1:7])
+                                     dimnames(x)[[2]][1:ncol(x)])
             invisible(cstats)
         } else {
             stop("Aborting! The number of input rows is odd!")

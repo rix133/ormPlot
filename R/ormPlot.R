@@ -10,11 +10,11 @@
 #' @section Summary plotting:
 #' The forestplot function facilitates plotting the
 #' \code{\link[rms]{summary.rms}} objects resulting from the
-#' \code{\link[rms]{orm}} model
+#' \code{\link[rms]{orm}} or \code{\link[rms]{lrm}} model
 #'
 #' See exported methods for more details:
 #' \itemize{
-#' \item \code{\link{plot.summary.orm}}
+#' \item \code{\link{plot.summary.rms}}
 #' \item \code{\link{forestplot}}
 #' \item \code{\link{join_ggplots}}
 #' }
@@ -22,7 +22,7 @@
 #' @section Prediction plotting:
 #' The predicion plotting function facilitates plotting the
 #' \code{\link[rms]{orm}} objects using the results got from
-#' \code{\link[rms]{Predict}} function. In Particular it adds coeficent
+#' \code{\link[rms]{Predict}} function. In particular it adds coeficent
 #' intervals to orm prediction plots.
 #'
 #' See exported methods for more details:

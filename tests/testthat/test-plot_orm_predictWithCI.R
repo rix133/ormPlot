@@ -1,6 +1,6 @@
 
 #READ THE TEST DATA
-test_model_001 <- readRDS("../testdata/test_model_001.rds")
+load("../testdata/test_model_001.rda")
 
 test_that("returns a ggplot object", {
   p <- plot.orm(test_model_001, cran_rzs, "Rural")

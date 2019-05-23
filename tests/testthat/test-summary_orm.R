@@ -1,5 +1,5 @@
 #READ THE TEST DATA
-test_model_001<-readRDS("../testdata/test_model_001.rds")
+load("../testdata/test_model_001.rda")
 
 
 test_that("object has the right class", {

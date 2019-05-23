@@ -1,0 +1,89 @@
+---
+title: "Plot rms summaries"
+author: "Richard Meitern"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Plot rms summaries}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warnings = FALSE
+)
+library(rms)
+```
+
+
+
+### Load the reqired libraries
+```{r setup}
+#the regression modelling by F. Harrell
+library(rms)
+
+#the extension for plotting the rms summary objects
+library(ormPlot)
+```
+
+### Looking at the bundeled data
+OrmPlot has `educ_data` bundeled. `educ_data` is used in this vignette
+to show the functionality of the package. To familiarize with the data:
+```{r eval=FALSE}
+#show first 6 rows
+head(educ_data)
+```
+
+
+```{r echo=FALSE, results="asis"}
+pander::pandoc.table(head(educ_data), split.tables=Inf)
+
+```
+```{r, eval = FALSE}
+#show variable explanation
+help(educ_data)
+```
+
+### Setting up rms datadist
+The rms package requres that a `datadist` object is set up properly. According
+to `datadist` documentation:
+`q.effect` is a set of two quantiles for computing the range of continuous
+variables to use in estimating regression effects.
+Defaults are `c(.25,.75)`, which yields inter-quartile-range odds ratios
+```{r}
+#q.effect determines for what range the odds ratios are given on plots
+dd <- datadist(educ_data, q.effect = c(0.5, 0.75))
+#set it also to options
+options(datadist="dd")
+```
+
+### Creating a model
+
+```{r}
+#see help(orm) for further info
+orm_model<-orm(educ_3 ~ Rural + sex + n_siblings + cran_rzs + height_rzs + 
+    FW_rzs + YOBc + (YOBc * sex) + (YOBc * Rural), data = educ_data)
+```
+
+### Plotting the model summary
+The easiest way is to just plot the summary object
+```{r}
+plot(summary(orm_model))
+```
+
+If this does not look nice enogh you can also get `ggplot2` objects to customise to your needs.
+The best way to get customizable plots is to specify `return_ggplots=TRUE`
+```{r}
+plots<-plot(summary(orm_model), return_ggplots=T)
+plots[[1]]
+plots[[2]]
+```
+These can be joined using the join_ggplots command
+```{r}
+join_ggplots(plots[[1]],plots[[2]], c(0.55,0.45))
+
+```
+To save as svg just use ggsave

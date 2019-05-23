@@ -44,3 +44,4 @@ rsconnect/
 .Rproj.user
 
 testingground.Rmd
+inst/doc

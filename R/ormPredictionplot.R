@@ -143,7 +143,6 @@ plot.orm <- function(x, xval, plot_cols = c(),
             return(ggplot2::label_both) else return(ggplot2::label_value)
     }
 
-
     # set what data to draw and where/how i.e. cran residSD in x etc.
     pred_plot <- ggplot2::ggplot(res,
                                  ggplot2::aes_string(

@@ -73,7 +73,7 @@ orm_model<-orm(educ_3 ~ Rural + sex + n_siblings + cran_rzs + height_rzs +
 ### Plotting the model predictions
 
 ```{r}
-plot(orm_model, "cran_rzs", "Rural")
+plot(orm_model, cran_rzs)
 ```
 
 

@@ -14,7 +14,6 @@ test_that("plotting test data generates the expected image", {
 
 test_that("can plot with only one value", {
   p <- plot.orm(test_model_001, cran_rzs)
-
   vdiffr::expect_doppelganger("prediction_ggplot_simplest", p)
 })
 

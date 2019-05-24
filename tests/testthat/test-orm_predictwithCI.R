@@ -23,3 +23,15 @@ test_that("result has expected prediction data in it", {
   }
 
 })
+
+test_that("result has expected column names", {
+  p <- orm.predict_with_ci(test_model_001, cran_rzs, Rural, sex)
+  pcols<- colnames(p[(ncol(p)-3):ncol(p)])
+  expcols<-c("Propability","lower","upper","dependent")
+  expect_equal(pcols, expcols)
+
+  p <- orm.predict_with_ci(test_model_002, cran_rzs, Rural, sex)
+  pcols<- colnames(p[(ncol(p)-3):ncol(p)])
+  expect_equal(pcols, expcols)
+
+})

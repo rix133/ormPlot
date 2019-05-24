@@ -13,7 +13,9 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  warnings = FALSE
+  warnings = FALSE,
+  fig.width = 6,
+  fig.height = 4
 )
 library(rms)
 ```
@@ -71,7 +73,10 @@ orm_model<-orm(educ_3 ~ Rural + sex + n_siblings + cran_rzs + height_rzs +
     FW_rzs + YOBc + (YOBc * sex) + (YOBc * Rural), data = educ_data)
 ```
 
-### Plotting the model predictions
+### Plotting the model predictions with CI
+
+The main advantage of using ormPlot is that you get plots with coeficent intervals
+shown on the plot.
 
 The simplest way is to predict for only one value. Plotting returs a 
 customisable ggplot object.
@@ -90,8 +95,8 @@ You can easily set custom lables.
 ```{r}
 
 p<-plot(orm_model, cran_rzs,  Rural, sex,
-                          xlab = "Cranial volume (residuals to age an birth date)",
-                          facet_labels = list(Rural = c("Urban", "Rural"),sex=c("Male","Female")))
+        xlab = "Cranial volume (residuals to age an birth date)",
+        facet_labels = list(Rural = c("Urban", "Rural"),sex=c("Male","Female")))
 
 
 

@@ -1,0 +1,17 @@
+citHeader("To cite ormPlot or the bundeled data in publications, please use:")
+
+
+citEntry(entry = "Article",
+  title        = "TBA",
+  author       = personList(as.person("Makus Valge"),
+                            as.person("Richard Meitern"),
+                            as.person("Peeter Hõrak")),
+  journal      = "TBA",
+  year         = "",
+  volume       = "",
+  number       = "",
+  pages        = "",
+  url          = "",
+
+  textVersion  ="in prep."
+)

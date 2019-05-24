@@ -76,9 +76,16 @@ join_ggplots <- function(leftplot, rightplot,
     if (length(plot.widths) != 2 || signif(sum(plot.widths), 3) != 1)
         stop("plot.widths should be a vector with 2 elements that sum to 1")
 
+    jointheme <-ggplot2::theme(plot.margin = grid::unit(c(0, 0, 0, 0), "lines"))
+
     tablewidth <- grid::unit(c(plot.widths[1], plot.widths[2]), c("npc"))
-    p1g <- ggplot2::ggplotGrob(leftplot + ggplot2::labs(subtitle = ""))
-    p2g <- ggplot2::ggplotGrob(rightplot + ggplot2::labs(subtitle = title))
+    p1g <- ggplot2::ggplotGrob(leftplot +
+                                ggplot2::labs(subtitle = "") +
+                                jointheme
+                               )
+    p2g <- ggplot2::ggplotGrob(rightplot +
+                               ggplot2::labs(subtitle = title) +
+                               jointheme)
     forestplot <- gtable::gtable_row("forestplot", list(p1g, p2g),
                                      widths = tablewidth,
                                      height = grid::unit(1, "npc"))

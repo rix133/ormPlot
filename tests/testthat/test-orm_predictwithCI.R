@@ -1,7 +1,10 @@
 load("../testdata/test_model_001.rda")
+load("../testdata/test_model_002.rda")
 
 test_that("result is a data frame", {
   p <- orm.predict_with_ci(test_model_001, cran_rzs, Rural, max_SEP_3, sex)
+  expect_true(is.data.frame(p))
+  p <- orm.predict_with_ci(test_model_002, cran_rzs, Rural, sex)
   expect_true(is.data.frame(p))
 })
 

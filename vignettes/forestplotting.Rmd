@@ -1,10 +1,10 @@
 ---
-title: "Plot rms summaries"
+title: "Plot rms summaries and predictions"
 author: "Richard Meitern"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Plot rms summaries}
+  %\VignetteIndexEntry{Plot rms summaries and predictions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -27,6 +27,9 @@ library(rms)
 
 #the extension for plotting the rms summary objects
 library(ormPlot)
+
+#to modify plots
+library(ggplot2)
 ```
 
 ### Looking at the bundeled data
@@ -67,23 +70,50 @@ options(datadist="dd")
 orm_model<-orm(educ_3 ~ Rural + sex + n_siblings + cran_rzs + height_rzs + 
     FW_rzs + YOBc + (YOBc * sex) + (YOBc * Rural), data = educ_data)
 ```
+### Plotting the model predictions
+
+```{r}
+plot(orm_model, "cran_rzs", "Rural")
+```
+
+
+
 
 ### Plotting the model summary
 The easiest way is to just plot the summary object
-```{r}
+```{r fig.width=7, fig.height=4 }
 plot(summary(orm_model))
 ```
 
 If this does not look nice enogh you can also get `ggplot2` objects to customise to your needs.
 The best way to get customizable plots is to specify `return_ggplots=TRUE`
-```{r}
+```{r fig.width=6}
 plots<-plot(summary(orm_model), return_ggplots=T)
 plots[[1]]
 plots[[2]]
 ```
-These can be joined using the join_ggplots command
-```{r}
-join_ggplots(plots[[1]],plots[[2]], c(0.55,0.45))
+
+
+These can be joined using the join_ggplots command. You can edit the plots as 
+any ggplot plot
+```{r, fig.width=7}
+
+p1 <- plots[[1]] + 
+  scale_x_discrete(labels=c("Mean", "Lower CI", "Upper CI"), 
+                   position = "top",
+                   name = NULL)
+
+# the x axis is actually y axis because the cordinates are flipped with coord_flip()
+p2 <- plots[[2]] + scale_y_continuous(breaks = c(0.5, 0.7, 0.9, 1.1),
+                                position = "right")
+  
+
+forestplot<-join_ggplots(p1,p2)
 
 ```
-To save as svg just use ggsave
+
+To save as svg fur further editing just use `ggsave` from `ggplot2`
+```{r, eval=FALSE}
+ggsave("forestplot.svg",forestplot)
+```
+

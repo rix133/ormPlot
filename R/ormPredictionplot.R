@@ -22,12 +22,13 @@ orm.predict_with_ci <- function(x, ..., np = 100,
                             upper = rep(0, items))
     preds <- list()
     j <- 1
+    cols <- ncol(x$Design$limits)+1
     for (i in ( ( length(x$yunique) - 1):1)) {
         pred <- rms::Predict(x, ..., type = "predictions",
                              np = np, fun = fun, kint = i,
                              conf.type = "mean",
                              conf.int = conf.int,
-                             boot.type = boot.type)[9:11] - last_pred
+                             boot.type = boot.type)[cols:(cols+2)] - last_pred
         preds[[j]] <- pred
         j <- j + 1
         all_preds <- last_pred + pred

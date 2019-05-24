@@ -1,7 +1,7 @@
 Package: ormPlot
 Type: Package
 Title: Advanced plotting orm models from rms package
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(person("Richard", "Meitern", , "richard.meitern@ut.ee", c("aut", "cre")))
 Maintainer: Richard Meitern <richard.meitern@ut.ee>
 Description: This is a work in progress r-package to extend the ordinal
@@ -21,6 +21,7 @@ Suggests:
     vdiffr,
     covr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    pander
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

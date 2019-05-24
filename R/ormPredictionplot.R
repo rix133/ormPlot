@@ -51,7 +51,7 @@ orm.predict_with_ci <- function(x, ..., np = 100,
     }
 
     # rename columns and set types
-    colnames(all_preds)[9] <- c("Propability")
+    colnames(all_preds)[cols] <- c("Propability")
     all_preds$dependent <- as.factor(all_preds$dependent)
 
     invisible(all_preds)

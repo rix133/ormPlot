@@ -70,13 +70,47 @@ options(datadist="dd")
 orm_model<-orm(educ_3 ~ Rural + sex + n_siblings + cran_rzs + height_rzs + 
     FW_rzs + YOBc + (YOBc * sex) + (YOBc * Rural), data = educ_data)
 ```
+
 ### Plotting the model predictions
 
+The simplest way is to predict for only one value. Plotting returs a 
+customisable ggplot object.
 ```{r}
 plot(orm_model, cran_rzs)
 ```
 
+For more complex models specify facet column and rows.
+```{r}
+plot(orm_model, cran_rzs,  Rural, sex)
 
+```
+
+
+You can easily set custom lables.
+```{r}
+
+p<-plot(orm_model, cran_rzs,  Rural, sex,
+                          xlab = "Cranial volume (residuals to age an birth date)",
+                          facet_labels = list(Rural = c("Urban", "Rural"),sex=c("Male","Female")))
+
+
+
+colors <- c("#4a9878", "#0a191e", "#d8b65c")
+educ_names <- c("Primary", "Secondary", "Tertiary")
+
+# further modifing like any other ggplot
+final_plot<-p + labs(color = "Education", fill = "Education") + 
+  scale_color_manual(values = colors, labels = educ_names) +
+  scale_fill_manual(values = colors, labels = educ_names) 
+ 
+final_plot 
+```
+
+
+Save like any ggplot graph.
+```{r eval = FALSE}
+ggsave("figures/educ_cran.svg",final_plot, height = 8 ,width = 8)
+```
 
 
 ### Plotting the model summary

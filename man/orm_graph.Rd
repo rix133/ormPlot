@@ -5,7 +5,8 @@
 \title{Make a ggplot figure}
 \usage{
 orm_graph(x, theme = ggplot2::theme_get(), header = NULL,
-  row.names.y = NULL, shape = 19, ...)
+  row.names.y = NULL, shape = 19, limits = NULL, breaks = c(0.5, 1,
+  1.5, 2, 3, 4), ...)
 }
 \arguments{
 \item{x}{a \code{maxtrix} or a \code{data.frame}}
@@ -17,6 +18,10 @@ orm_graph(x, theme = ggplot2::theme_get(), header = NULL,
 \item{row.names.y}{new names for the variable rows}
 
 \item{shape}{point shape, see \code{\link[ggplot2]{aes_linetype_size_shape}}}
+
+\item{limits}{the x axis limits as a vector code{\link[ggplot2]{xlim}}}
+
+\item{breaks}{the x axis breaks as a vector}
 
 \item{...}{Arguments passed on to \code{ggplot2::theme}
 \describe{

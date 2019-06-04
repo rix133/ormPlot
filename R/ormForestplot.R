@@ -191,11 +191,13 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
 #' @param header names of the table columns
 #' @param row.names.y new names for the variable rows
 #' @param shape point shape, see \code{\link[ggplot2]{aes_linetype_size_shape}}
+#' @param limits the x axis limits as a vector code{\link[ggplot2]{xlim}}
+#' @param breaks the x axis breaks as a vector
 #' @inheritDotParams ggplot2::theme
 #'
 orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
-                           row.names.y = NULL, shape = 19,
-                            ...) {
+                           row.names.y = NULL, shape = 19, limits = NULL,
+                           breaks = c(0.5, 1, 1.5, 2, 3, 4), ...) {
     # set the theme
     ggplot2::theme_set(theme)
 
@@ -230,8 +232,8 @@ orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
     # flip coordinates (puts labels on y axis)
     ggplot2::coord_flip() +
     # TODO set the breaks at appropriate places automatically and allow override
-    ggplot2::scale_y_continuous(breaks = c(0.5, 1, 1.5, 2, 3, 4),
-                                position = "right") +
+    ggplot2::scale_y_continuous(breaks = breaks,
+                                position = "right", limits = limits) +
     # set the y lables sam for plot and table
     ggplot2::scale_x_discrete(limits = rev(row.names.y)) +
     # use the theme set prevoiosly and modify some things

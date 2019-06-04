@@ -27,4 +27,23 @@ test_that("plotting test data can handle modified column names", {
   vdiffr::expect_doppelganger("ggplot_letters_orm_graph", p)
 })
 
+test_that("x axis limits can be changed", {
+  p <- orm_graph(test_data_001[1:6,],limits=c(0.5,2))
+  expect_true(ggplot2::is.ggplot(p))
+  vdiffr::expect_doppelganger("ggplot_limits_orm_graph", p)
+})
+
+test_that("x axis breaks can be changed", {
+  p <- orm_graph(test_data_001[1:6,],breaks=c(0.5,2))
+  expect_true(ggplot2::is.ggplot(p))
+  vdiffr::expect_doppelganger("ggplot_breaks_orm_graph", p)
+})
+
+test_that("x axis tickmarks can be changed", {
+  p <- orm_graph(test_data_001[1:6,],shape=22)
+  expect_true(ggplot2::is.ggplot(p))
+  vdiffr::expect_doppelganger("ggplot_shape_orm_graph", p)
+})
+
+
 

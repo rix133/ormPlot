@@ -11,11 +11,11 @@
   \item{sex}{geneder of the child)}
   \item{max_SEP_3}{highest parental proffesion}
   \item{n_siblings}{number of children in the family}
-  \item{cran_rzs}{standardized residuals of cranial volume}
-  \item{height_rzs}{standardized residuals of height}
-  \item{FW_rzs}{standardized residuals of face width}
+  \item{cran_rzs}{cranial volume (residuals to age an birth date)}
+  \item{height_rzs}{height (residuals to age an birth date)}
+  \item{FW_rzs}{face width (residuals to age an birth date)}
   \item{YOB}{year of birth}
-  \item{YOBc}{standardized residuals of YOB}
+  \item{YOBc}{centered but not scaled year of birth (YOB)}
 
 
 }}

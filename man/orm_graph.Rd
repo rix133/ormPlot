@@ -5,7 +5,7 @@
 \title{Make a ggplot figure}
 \usage{
 orm_graph(x, theme = ggplot2::theme_get(), header = NULL,
-  row.names.y = NULL, ...)
+  row.names.y = NULL, shape = 19, ...)
 }
 \arguments{
 \item{x}{a \code{maxtrix} or a \code{data.frame}}
@@ -15,6 +15,8 @@ orm_graph(x, theme = ggplot2::theme_get(), header = NULL,
 \item{header}{names of the table columns}
 
 \item{row.names.y}{new names for the variable rows}
+
+\item{shape}{point shape, see \code{\link[ggplot2]{aes_linetype_size_shape}}}
 
 \item{...}{Arguments passed on to \code{ggplot2::theme}
 \describe{

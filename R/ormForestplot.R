@@ -121,7 +121,8 @@ oddstable <- function(x) {
 oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
                            header = NULL, row.names.y = NULL, ...) {
     columns <- c(4, 6, 7)
-
+    #see https://stackoverflow.com/questions/17311917/ggplot2-the-unit-of-size
+    text_size_adjust <- (1 / 72.27) * 25.4
     if (is.null(row.names.y))
         row.names.y <- rownames(x)
 
@@ -146,11 +147,21 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
 
     tableplot <- tableplot +
         ggplot2::geom_text(ggplot2::aes(x = colnames(x)[4],
-                                        label = round(x[, 4], digits))) +
+                                        label = round(x[, 4], digits)),
+                           color = theme$text$colour,
+                           size =  theme$text$size*text_size_adjust,
+                           family = theme$text$family
+                           ) +
         ggplot2::geom_text(ggplot2::aes(x = colnames(x)[6],
-        label = round(x[, 6], digits))) +
+                                        label = round(x[, 6], digits)),
+                            color=theme$text$colour,
+                           size =  theme$text$size*text_size_adjust,
+                            family = theme$text$family) +
         ggplot2::geom_text(ggplot2::aes(x = colnames(x)[7],
-                                        label = round(x[, 7], digits)))
+                                        label = round(x[, 7], digits)),
+                           color=theme$text$colour,
+                           size =  theme$text$size*text_size_adjust,
+                           family = theme$text$family)
 
     tableplot <- tableplot +
         ggplot2::scale_y_discrete(limits = rev(rownames(x)),
@@ -166,7 +177,7 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
         axis.text = theme$text,
         plot.margin = grid::unit(c(0, 0, 0, 0), "lines"))
 
-    tableplot <- tableplot + ggplot2::theme(...)
+    tableplot <- tableplot + ggplot2::theme(..., validate=FALSE)
 
     invisible(tableplot)
 
@@ -179,10 +190,11 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
 #' @param theme the desired ggplot2 theme
 #' @param header names of the table columns
 #' @param row.names.y new names for the variable rows
+#' @param shape point shape, see \code{\link[ggplot2]{aes_linetype_size_shape}}
 #' @inheritDotParams ggplot2::theme
 #'
 orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
-                           row.names.y = NULL,
+                           row.names.y = NULL, shape = 19,
                             ...) {
     # set the theme
     ggplot2::theme_set(theme)
@@ -212,7 +224,7 @@ orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
                                                 y = eval(effect_val),
                                          ymin = eval(lower_val),
                                          ymax = eval(upper_val))) +
-        ggplot2::geom_pointrange() +
+        ggplot2::geom_pointrange(colour = theme$line$colour, shape = shape) +
     # add a dotted line at x=1 after flip
     ggplot2::geom_hline(yintercept = 1, lty = 2) +
     # flip coordinates (puts labels on y axis)
@@ -222,7 +234,7 @@ orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
                                 position = "right") +
     # set the y lables sam for plot and table
     ggplot2::scale_x_discrete(limits = rev(row.names.y)) +
-    # use the theme set prevoiosly
+    # use the theme set prevoiosly and modify some things
     ggplot2::theme(axis.ticks.x.top = ggplot2::element_line(colour = "black"),
                    axis.line = ggplot2::element_line(colour = "black"),
                    panel.grid.major = ggplot2::element_blank(),
@@ -238,7 +250,7 @@ orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
                    plot.margin = grid::unit(c(0, 0, 0, 0), "lines"))
 
     #add theme elements from passed on objects
-    p <- p + ggplot2::theme(...)
+    p <- p + ggplot2::theme(..., validate =FALSE)
 
     invisible(p)
 }

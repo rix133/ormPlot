@@ -28,8 +28,13 @@
 #' See exported methods for more details:
 #' \itemize{
 #' \item \code{\link{plot.orm}}
-#' \item \code{\link{orm.predict_with_ci}}
+#' \item \code{\link{predict_with_ci.orm}}
 #' }
+#'
+#' @section Data:
+#' In addition the package incorporates data about morfometrics of schoolchildren
+#' born between 1937-1962 in Estonian territory.
+#' \code{\link{educ_data}}
 #'
 #' @docType package
 #' @name ormPlot

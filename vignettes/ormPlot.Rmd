@@ -1,10 +1,10 @@
 ---
-title: "Plot rms summaries and predictions"
+title: "Plot rms model summaries and predictions"
 author: "Richard Meitern"
-date: "`r Sys.Date()`"
+date: "06/11/2019"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Plot rms summaries and predictions}
+  %\VignetteIndexEntry{Plot rms model summaries and predictions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -155,4 +155,5 @@ To save as svg fur further editing just use `ggsave` from `ggplot2`
 ```{r, eval=FALSE}
 ggsave("forestplot.svg",forestplot)
 ```
+
 

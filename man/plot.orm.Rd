@@ -54,7 +54,7 @@ columns}
 \item{conf.int}{
 	confidence level.  Default is 0.95.  Specify \code{FALSE} to suppress.}
 
-\item{...}{additional paremeters taht will be passed to \code{\link[rms]{Predict}}}
+\item{...}{additional paremeters that will be passed to \code{\link[rms]{Predict}}}
 }
 \value{
 a \code{ggplot} plot object
@@ -65,6 +65,10 @@ not included in the plot are kept constant. Hence it requres at least one
 variable to produce a plot.
 returns a \code{ggplot} object that can be further customized like any
 other ggplot
+}
+\examples{
+
+
 }
 \seealso{
 \code{\link[rms]{Predict}}

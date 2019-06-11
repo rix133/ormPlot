@@ -10,7 +10,7 @@
 #'
 #' @seealso \code{\link[rms]{Predict}}
 #' @export
-orm.predict_with_ci <- function(x, ..., np = 100,
+predict_with_ci.orm <- function(x, ..., np = 100,
                               fun = stats::plogis,
                               conf.int = 0.95,
                               boot.type = "bca") {
@@ -66,7 +66,7 @@ orm.predict_with_ci <- function(x, ..., np = 100,
 #' other ggplot
 #
 #'
-#' @inheritParams orm.predict_with_ci
+#' @inheritParams predict_with_ci.orm
 #' @param xval The model value plotted on the x axis
 #' @param xlab A custom x-axis value (if specified)
 #' @param ylab A custom y-axis value (if specified)
@@ -78,11 +78,14 @@ orm.predict_with_ci <- function(x, ..., np = 100,
 #'  columns
 #' @param label_with_colname Should he variable name also be included on plot
 #' row and column names
-#' @param ... additional paremeters taht will be passed to \code{\link[rms]{Predict}}
+#' @param ... additional paremeters that will be passed to \code{\link[rms]{Predict}}
 #'
 #'
 #'
 #' @return a \code{ggplot} plot object
+#'
+#' @examples
+#'
 #'
 #' @seealso \code{\link[rms]{Predict}}
 #' @export
@@ -124,7 +127,7 @@ plot.orm <- function(x, xval, plot_cols = c(),
 
     new_args<-c(substitute(xval), plot_cols_str, plot_rows_str, list(...))
 
-    res <- do.call(orm.predict_with_ci,c(list(x=x),
+    res <- do.call(predict_with_ci.orm,c(list(x=x),
                                          as.list(new_args),
                                          list(fun = fun,
                                          boot.type = boot.type,

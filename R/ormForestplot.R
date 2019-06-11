@@ -191,8 +191,10 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
 #' @param header names of the table columns
 #' @param row.names.y new names for the variable rows
 #' @param shape point shape, see \code{\link[ggplot2]{aes_linetype_size_shape}}
-#' @param limits the x axis limits as a vector code{\link[ggplot2]{xlim}}
-#' @param breaks the x axis breaks as a vector
+#' @param limits the x axis limits as a vector, see also:
+#'  \code{\link[ggplot2]{scale_continuous}}
+#' @param breaks the x axis breaks as a vector,help see also:
+#'  \code{\link[ggplot2]{scale_continuous}}
 #' @inheritDotParams ggplot2::theme
 #'
 orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,

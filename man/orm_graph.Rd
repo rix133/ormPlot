@@ -19,9 +19,11 @@ orm_graph(x, theme = ggplot2::theme_get(), header = NULL,
 
 \item{shape}{point shape, see \code{\link[ggplot2]{aes_linetype_size_shape}}}
 
-\item{limits}{the x axis limits as a vector code{\link[ggplot2]{xlim}}}
+\item{limits}{the x axis limits as a vector, see also:
+\code{\link[ggplot2]{scale_continuous}}}
 
-\item{breaks}{the x axis breaks as a vector}
+\item{breaks}{the x axis breaks as a vector,help see also:
+\code{\link[ggplot2]{scale_continuous}}}
 
 \item{...}{Arguments passed on to \code{ggplot2::theme}
 \describe{

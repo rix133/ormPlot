@@ -1,7 +1,7 @@
 Package: ormPlot
 Type: Package
 Title: Advanced plotting orm models from rms package
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: c(person("Richard", "Meitern", , "richard.meitern@ut.ee", c("aut", "cre")))
 Maintainer: Richard Meitern <richard.meitern@ut.ee>
 Description: This is a work in progress r-package to extend the ordinal
@@ -10,18 +10,18 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.1)
+    R (>= 3.5.0)
 Imports: 
-    ggplot2,
-    rms,
-    gtable,
-    grid
+    ggplot2 (>= 3.1.0),
+    rms (>= 5.1.3),
+    gtable (>= 0.3.0),
+    grid (>= 3.5.0)
 Suggests: 
     testthat (>= 2.1.0),
-    vdiffr,
-    covr,
-    knitr,
-    rmarkdown,
-    pander
+    vdiffr (>= 0.3.0),
+    covr (>= 3.2.1),
+    knitr (>= 1.22),
+    rmarkdown (>= 1.13),
+    pander (>= 0.6.3)
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr

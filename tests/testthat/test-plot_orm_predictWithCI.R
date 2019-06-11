@@ -1,6 +1,15 @@
 
-#READ THE TEST DATA
-load("../testdata/test_model_001.rda")
+## load the data
+
+test_data<-educ_data
+dd<<-rms::datadist(test_data,q.effect = c(0.5, 0.75))
+options(datadist="dd")
+
+#create the test model
+
+test_model_001<-rms::orm(educ_3 ~ Rural + sex + max_SEP_3 + n_siblings +
+                           cran_rzs + height_rzs +  FW_rzs + YOBc +
+                           (YOBc * sex) + (YOBc * Rural), data = test_data)
 
 test_that("returns a ggplot object", {
   p <- plot.orm(test_model_001, cran_rzs, "Rural")

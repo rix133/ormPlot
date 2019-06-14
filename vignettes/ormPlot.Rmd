@@ -114,7 +114,7 @@ final_plot
 
 Save like any ggplot graph.
 ```{r eval = FALSE}
-ggsave("figures/educ_cran.svg",final_plot, height = 8 ,width = 8)
+ggsave("educ_cran.svg",final_plot, height = 8 ,width = 8)
 ```
 
 
@@ -127,7 +127,7 @@ plot(summary(orm_model))
 If this does not look nice enogh you can also get `ggplot2` objects to customise to your needs.
 The best way to get customizable plots is to specify `return_ggplots=TRUE`
 ```{r fig.width=6}
-plots<-plot(summary(orm_model), return_ggplots=T)
+plots<-forestplot(summary(orm_model), return_ggplots=T)
 plots[[1]]
 plots[[2]]
 ```

@@ -5,7 +5,7 @@
 \title{Make a ggplot table}
 \usage{
 oddstable_graph(x, digits = 3, theme = ggplot2::theme_get(),
-  header = NULL, row.names.y = NULL, ...)
+  header = NULL, row.names.y = NULL)
 }
 \arguments{
 \item{x}{a \code{maxtrix} or a \code{data.frame}}

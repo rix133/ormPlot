@@ -1,13 +1,13 @@
 Package: ormPlot
 Type: Package
-Title: Advanced plotting orm models from rms package
+Title: Advanced Plotting of Ordinal Regression  Models 
 Version: 0.3.0
 Authors@R: c(person("Richard", "Meitern", , "richard.meitern@ut.ee", c("aut", "cre")))
 Maintainer: Richard Meitern <richard.meitern@ut.ee>
-Description: The package is an extension to the rms package that
-    facilitates plotting the ordinal regression  model (orm) predictions 
-    together with coefficent intervals for each dependent variable level. 
-    It also adds a function to plot the orm or lrm model summary as a ggplot2
+Description: An extension to the Regression Modeling Strategies package that
+    facilitates plotting ordinal regression  model predictions together with coefficient
+    intervals for each dependent variable level. 
+    It also adds a functionality to plot the  model summary as a modifiable 
     object.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -22,7 +22,6 @@ Imports:
 Suggests: 
     testthat (>= 2.1.0),
     vdiffr (>= 0.3.0),
-    covr (>= 3.2.1),
     knitr (>= 1.22),
     rmarkdown (>= 1.13),
     pander (>= 0.6.3)

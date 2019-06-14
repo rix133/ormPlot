@@ -2,15 +2,21 @@
 #'
 #' returns a \code{data.frame} object similar to the \code{\link[rms]{Predict}}
 #' however it adds a column dependent that lists all factor levels with
-#' appropriate cofficent intervals calcualted for each level
+#' appropriate cofficent intervals calcualted for each level. It is simalar to
+#' \code{\link[rms]{predict.lrm}} with \code{type="fitted.ind"} but also generates
+#' selected coeficent intervals.
 #'
 #' @inheritParams rms::Predict
 #'
 #' @return a \code{data.frame}
 #'
-#' @seealso \code{\link[rms]{Predict}}
+#' @seealso \code{\link[rms]{Predict}},\code{\link[rms]{orm}}, \code{\link[rms]{predict.lrm}}
+#'
+#' @example inst/examples/predict_with_CI.R
+#'
+#'
 #' @export
-predict_with_ci.orm <- function(x, ..., np = 100,
+predict_with_ci <- function(x, ..., np = 100,
                               fun = stats::plogis,
                               conf.int = 0.95,
                               boot.type = "bca") {
@@ -66,7 +72,7 @@ predict_with_ci.orm <- function(x, ..., np = 100,
 #' other ggplot
 #
 #'
-#' @inheritParams predict_with_ci.orm
+#' @inheritParams predict_with_ci
 #' @param xval The model value plotted on the x axis
 #' @param xlab A custom x-axis value (if specified)
 #' @param ylab A custom y-axis value (if specified)
@@ -84,10 +90,9 @@ predict_with_ci.orm <- function(x, ..., np = 100,
 #'
 #' @return a \code{ggplot} plot object
 #'
-#' @examples
+#' @example inst/examples/plot_orm.R
 #'
-#'
-#' @seealso \code{\link[rms]{Predict}}
+#' @seealso \code{\link[rms]{Predict}}, \code{\link[rms]{datadist}}, \code{\link[rms]{orm}}
 #' @export
 plot.orm <- function(x, xval, plot_cols = c(),
                      plot_rows = c(),
@@ -127,7 +132,7 @@ plot.orm <- function(x, xval, plot_cols = c(),
 
     new_args<-c(substitute(xval), plot_cols_str, plot_rows_str, list(...))
 
-    res <- do.call(predict_with_ci.orm,c(list(x=x),
+    res <- do.call(predict_with_ci,c(list(x=x),
                                          as.list(new_args),
                                          list(fun = fun,
                                          boot.type = boot.type,

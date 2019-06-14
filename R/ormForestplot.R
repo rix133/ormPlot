@@ -1,13 +1,5 @@
-#' Forest Plot of an rms model summary
-#'
-#' Convinience function to create a plot of the \code{\link[rms]{orm}} or
-#' \code{\link[rms]{lrm}} model summary. For further customising the plots
-#'  use \code{return_ggplots = TRUE}
-#' This will create 2 \code{ggplot2} objects that can be joined with the
-#' \code{\link{join_ggplots}} commands.
-#'
-#' @inheritDotParams forestplot
-#' @inheritParams forestplot
+#' @rdname forestplot
+#' @param ... see parameters of method \code{\link{forestplot}}
 #' @method plot summary.rms
 #' @export
 "plot.summary.rms"<-function(x, ...){
@@ -25,20 +17,34 @@
 #' @param return_ggplots if \code{TRUE} the fuction returns 2 ggplot objects
 #'  in a list instead of drawing a tablegrid
 #' @param  x result of a \code{summary} command on
-#'  \code{\link[rms]{orm}}  model ie a summary.orm class object
+#'  \code{\link[rms]{orm}} or \code{\link[rms]{lrm}}  model ie a
+#'  \code{\link[rms]{summary.rms}} class object
 #' @inheritParams join_ggplots
-#' @inheritDotParams oddstable_graph
+#' @inheritParams oddstable_graph
+#' @inheritParams orm_graph
 #' @aliases forestplot.orm forestplot.lrm
+#' @example inst/examples/forestplot.R
 #' @export
 forestplot <- function(x, return_ggplots = FALSE,
-                               plot.widths = c(0.5, 0.5),
-                               title = "Odds Ratio" , ...) {
+                               plot.widths = c(0.5,0.5),
+                               title = "Odds ratio",
+                               digits = 3,
+                               shape = 19,
+                               header = NULL,
+                               limits = NULL,
+                               breaks = c(0.5, 1, 1.5, 2, 3, 4),
+                               theme = ggplot2::theme_get(),
+                               row.names.y = NULL) {
 
     oddstable <- oddstable(x)
 
-    tableplot <- oddstable_graph(oddstable, ...)
+    tableplot <- oddstable_graph(oddstable, digits, theme,
+                                 header, row.names.y)
 
-    tablegraph <- orm_graph(oddstable, ...)
+
+    tablegraph <- orm_graph(oddstable, theme, header,
+                            row.names.y, shape, limits,
+                            breaks)
 
     if (return_ggplots) {
         return(list(tableplot, tablegraph))
@@ -68,7 +74,7 @@ forestplot.default <- function(x, ...){
 #' should be a vector (\code{c()})  with 2 elements that sum to 1 defaults to
 #' equal widths
 #' @param title the tile row of the drawn plot
-#'
+#' @example inst/examples/join_ggplots.R
 #' @export
 join_ggplots <- function(leftplot, rightplot,
                          plot.widths = c(0.5, 0.5),
@@ -76,7 +82,9 @@ join_ggplots <- function(leftplot, rightplot,
     if (length(plot.widths) != 2 || signif(sum(plot.widths), 3) != 1)
         stop("plot.widths should be a vector with 2 elements that sum to 1")
 
-    jointheme <-ggplot2::theme(plot.margin = grid::unit(c(0, 0, 0, 0), "lines"))
+    jointheme <-  ggplot2::theme(plot.margin = grid::unit(c(0, 0, 0, 0), "lines"),
+                                 plot.subtitle = ggplot2::theme_get()$text)
+
 
     tablewidth <- grid::unit(c(plot.widths[1], plot.widths[2]), c("npc"))
     p1g <- ggplot2::ggplotGrob(leftplot +
@@ -119,7 +127,7 @@ oddstable <- function(x) {
 #' @inheritDotParams ggplot2::theme
 #'
 oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
-                           header = NULL, row.names.y = NULL, ...) {
+                           header = NULL, row.names.y = NULL) {
     columns <- c(4, 6, 7)
     #see https://stackoverflow.com/questions/17311917/ggplot2-the-unit-of-size
     text_size_adjust <- (1 / 72.27) * 25.4
@@ -177,7 +185,6 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
         axis.text = theme$text,
         plot.margin = grid::unit(c(0, 0, 0, 0), "lines"))
 
-    tableplot <- tableplot + ggplot2::theme(..., validate=FALSE)
 
     invisible(tableplot)
 
@@ -199,7 +206,7 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
 #'
 orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
                            row.names.y = NULL, shape = 19, limits = NULL,
-                           breaks = c(0.5, 1, 1.5, 2, 3, 4), ...) {
+                           breaks = c(0.5, 1, 1.5, 2, 3, 4)) {
     # set the theme
     ggplot2::theme_set(theme)
 
@@ -253,8 +260,7 @@ orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
                    axis.text = theme$text,
                    plot.margin = grid::unit(c(0, 0, 0, 0), "lines"))
 
-    #add theme elements from passed on objects
-    p <- p + ggplot2::theme(..., validate =FALSE)
+
 
     invisible(p)
 }

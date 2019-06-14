@@ -12,10 +12,11 @@ The goal of ormPlot is to to extend the plotting capabilties of rms package.
 In particular it aims to provide convenient ways of getting ggplot2 plots 
 from orm and lrm models of the rms package.
 It provides:
- * prediction plots of orm models together with coeficent intervals
- * forrest plots of orm/lrm model summaries
- * data about schoolchildren body measurments (residuals) and their family 
-   socioeconomic status and size
+ * prediction plots of orm models for each level together with coeficent intervals
+   for each level.
+ * forrest plots of orm/lrm model summaries, adressing the drawbacks of the package forestplot
+ * data about schoolchildren body measurments and their family details like
+   socioeconomic status and number of siblings
 
 ## Installation
 

@@ -1,10 +1,10 @@
-#' Create a Prediction data.frame with coeficent intervals
+#' Create a Prediction data.frame with confidence intervals
 #'
 #' returns a \code{data.frame} object similar to the \code{\link[rms]{Predict}}
 #' however it adds a column dependent that lists all factor levels with
-#' appropriate cofficent intervals calcualted for each level. It is simalar to
+#' appropriate confidence intervals calculated for each level. It is similar to
 #' \code{\link[rms]{predict.lrm}} with \code{type="fitted.ind"} but also generates
-#' selected coeficent intervals.
+#' selected confidence intervals.
 #'
 #' @inheritParams rms::Predict
 #'
@@ -57,16 +57,16 @@ predict_with_ci <- function(x, ..., np = 100,
     }
 
     # rename columns and set types
-    colnames(all_preds)[cols] <- c("Propability")
+    colnames(all_preds)[cols] <- c("Probability")
     all_preds$dependent <- as.factor(all_preds$dependent)
 
     invisible(all_preds)
 }
 
-#' Plot the prediction with coeficent intervals
+#' Plot the prediction with confidence intervals
 #'
-#' This fuction plots the model predictions given that all variables that are
-#' not included in the plot are kept constant. Hence it requres at least one
+#' This function plots the model predictions given that all variables that are
+#' not included in the plot are kept constant. Hence it requires at least one
 #' variable to produce a plot.
 #' returns a \code{ggplot} object that can be further customized like any
 #' other ggplot
@@ -80,11 +80,11 @@ predict_with_ci <- function(x, ..., np = 100,
 #'  should be plotted. These are put on rows.
 #' @param plot_cols A vector of strings with  other model components that
 #'  should be plotted. These are put on columns.
-#' @param facet_labels A  named list of new names for varaibles on rows and
+#' @param facet_labels A  named list of new names for variables on rows and
 #'  columns
 #' @param label_with_colname Should he variable name also be included on plot
 #' row and column names
-#' @param ... additional paremeters that will be passed to \code{\link[rms]{Predict}}
+#' @param ... additional parameters that will be passed to \code{\link[rms]{Predict}}
 #'
 #'
 #'
@@ -155,11 +155,11 @@ plot.orm <- function(x, xval, plot_cols = c(),
     pred_plot <- ggplot2::ggplot(res,
                                  ggplot2::aes_string(
                                      x = as.character(substitute(xval)),
-                                     y = "Propability",
+                                     y = "Probability",
                                      color = "dependent")) +
         # add the lines
         ggplot2::geom_line(size = 1) +
-        # add the coefidence intervals
+        # add the confidence intervals
         ggplot2::geom_ribbon(ggplot2::aes_string(ymin = "lower",
                                                  ymax = "upper",
                                                  fill = "dependent",
@@ -197,7 +197,7 @@ plot.orm <- function(x, xval, plot_cols = c(),
 
 #' Function to convert any input to string vector
 #'
-#' @param x string, object name or vector of theese
+#' @param x string, object name or vector of these
 #' @return vector of strings
 convert_arg<-function(x){
 

@@ -23,7 +23,7 @@ forestplot(s)
 forestplot(s, return_ggplots = TRUE )
 
 #new row names and header
-newnames <- c("Year of birth", "Height", "Number of children", "Cranial volumne", "Sex" )
+newnames <- c("Year of birth", "Height", "Number of children", "Cranial volume", "Sex" )
 newhead <- c("Odds Ratio", "CI 5%", "CI 95%" )
 
 #adjust also the relative plot widths and change the color and shape

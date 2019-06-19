@@ -5,7 +5,7 @@ Version: 0.3.0
 Authors@R: c(person("Richard", "Meitern", , "richard.meitern@ut.ee", c("aut", "cre")))
 Maintainer: Richard Meitern <richard.meitern@ut.ee>
 Description: An extension to the Regression Modeling Strategies package that
-    facilitates plotting ordinal regression  model predictions together with coefficient
+    facilitates plotting ordinal regression  model predictions together with confidence
     intervals for each dependent variable level. 
     It also adds a functionality to plot the  model summary as a modifiable 
     object.

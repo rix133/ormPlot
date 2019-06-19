@@ -9,12 +9,12 @@
 
 #' Forest Plot of an rms model summary
 #'
-#' Convinience function to create a plot of the \code{\link[rms]{orm}}  model
-#' summary. For further customising the plots use \code{return_ggplots = TRUE}
+#' Convenience function to create a plot of the \code{\link[rms]{orm}}  model
+#' summary. For further customizing the plots use \code{return_ggplots = TRUE}
 #' This will create 2 \code{ggplot2} objects that can be joined with the
 #' \code{\link{join_ggplots}} commands.
 #'
-#' @param return_ggplots if \code{TRUE} the fuction returns 2 ggplot objects
+#' @param return_ggplots if \code{TRUE} the function returns 2 ggplot objects
 #'  in a list instead of drawing a tablegrid
 #' @param  x result of a \code{summary} command on
 #'  \code{\link[rms]{orm}} or \code{\link[rms]{lrm}}  model ie a
@@ -102,7 +102,7 @@ join_ggplots <- function(leftplot, rightplot,
     invisible(forestplot)
 }
 #' Get row names from odd an values form even columns
-#' @param x a \code{maxtrix} with even number of rows
+#' @param x a \code{matrix} with even number of rows
 oddstable <- function(x) {
         if (nrow(x) %% 2 == 0) {
             cstats <- x[c(FALSE, TRUE), c(1:ncol(x))]
@@ -119,8 +119,8 @@ oddstable <- function(x) {
 #'
 #' Function to get a ggplot table from a matrix
 #'
-#' @param x a \code{maxtrix} or a \code{data.frame}
-#' @param digits the number of siginficants digits to display
+#' @param x a \code{matrix} or a \code{data.frame}
+#' @param digits the number of significant digits to display
 #' @param theme the desired ggplot2 theme
 #' @param header names of the table columns
 #' @param row.names.y new names for the variable rows
@@ -193,7 +193,7 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
 #'
 #' Function to get a ggplot figure from a matrix x
 #'
-#' @param x a \code{maxtrix} or a \code{data.frame}
+#' @param x a \code{matrix} or a \code{data.frame}
 #' @param theme the desired ggplot2 theme
 #' @param header names of the table columns
 #' @param row.names.y new names for the variable rows

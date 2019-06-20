@@ -7,7 +7,7 @@
 convert_arg(x)
 }
 \arguments{
-\item{x}{string, object name or vector of theese}
+\item{x}{string, object name or vector of these}
 }
 \value{
 vector of strings

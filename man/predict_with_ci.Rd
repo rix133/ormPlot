@@ -2,7 +2,7 @@
 % Please edit documentation in R/ormPredictionplot.R
 \name{predict_with_ci}
 \alias{predict_with_ci}
-\title{Create a Prediction data.frame with coeficent intervals}
+\title{Create a Prediction data.frame with confidence intervals}
 \usage{
 predict_with_ci(x, ..., np = 100, fun = stats::plogis,
   conf.int = 0.95, boot.type = "bca")
@@ -68,9 +68,9 @@ a \code{data.frame}
 \description{
 returns a \code{data.frame} object similar to the \code{\link[rms]{Predict}}
 however it adds a column dependent that lists all factor levels with
-appropriate cofficent intervals calcualted for each level. It is simalar to
+appropriate confidence intervals calculated for each level. It is similar to
 \code{\link[rms]{predict.lrm}} with \code{type="fitted.ind"} but also generates
-selected coeficent intervals.
+selected confidence intervals.
 }
 \examples{
 set.seed(123)
@@ -85,12 +85,12 @@ options(datadist="dd")
 #create the model
 cran_model <- orm(educ_3 ~ Rural + sex + max_SEP_3 + cran_rzs, data = educ_data)
 
-#get the predictions of the orm model with coeficent intervals for all levels
+#get the predictions of the orm model with confidence intervals for all levels
 predictiondf<-predict_with_ci(cran_model, cran_rzs, Rural, sex, max_SEP_3)
 #show the predictions head
 head(predictiondf)
 
-#get the predictions of the orm model with coeficent intervals for sex only
+#get the predictions of the orm model with confidence intervals for sex only
 predictiondf_sex<-predict_with_ci(cran_model,  sex)
 #show the predictions head
 head(predictiondf_sex)

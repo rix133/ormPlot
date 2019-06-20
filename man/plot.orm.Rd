@@ -2,7 +2,7 @@
 % Please edit documentation in R/ormPredictionplot.R
 \name{plot.orm}
 \alias{plot.orm}
-\title{Plot the prediction with coeficent intervals}
+\title{Plot the prediction with confidence intervals}
 \usage{
 \method{plot}{orm}(x, xval, plot_cols = c(), plot_rows = c(),
   label_with_colname = TRUE, facet_labels = NULL, xlab = NULL,
@@ -27,7 +27,7 @@ should be plotted. These are put on rows.}
 \item{label_with_colname}{Should he variable name also be included on plot
 row and column names}
 
-\item{facet_labels}{A  named list of new names for varaibles on rows and
+\item{facet_labels}{A  named list of new names for variables on rows and
 columns}
 
 \item{xlab}{A custom x-axis value (if specified)}
@@ -54,14 +54,14 @@ columns}
 \item{conf.int}{
 	confidence level.  Default is 0.95.  Specify \code{FALSE} to suppress.}
 
-\item{...}{additional paremeters that will be passed to \code{\link[rms]{Predict}}}
+\item{...}{additional parameters that will be passed to \code{\link[rms]{Predict}}}
 }
 \value{
 a \code{ggplot} plot object
 }
 \description{
-This fuction plots the model predictions given that all variables that are
-not included in the plot are kept constant. Hence it requres at least one
+This function plots the model predictions given that all variables that are
+not included in the plot are kept constant. Hence it requires at least one
 variable to produce a plot.
 returns a \code{ggplot} object that can be further customized like any
 other ggplot

@@ -8,8 +8,8 @@
 \describe{
   \item{educ_3}{highest obtained educational level}
   \item{Rural}{location of school (rural or urban)}
-  \item{sex}{geneder of the child)}
-  \item{max_SEP_3}{highest parental proffesion}
+  \item{sex}{gender of the child)}
+  \item{max_SEP_3}{highest parental profession}
   \item{n_siblings}{number of children in the family}
   \item{cran_rzs}{cranial volume (residuals to age an birth date)}
   \item{height_rzs}{height (residuals to age an birth date)}
@@ -23,6 +23,6 @@
 educ_data
 }
 \description{
-A dataset containing the standardized residuals of Estonain schoolchildren.
+A dataset containing the standardized residuals of Estonian schoolchildren.
 }
 \keyword{datasets}

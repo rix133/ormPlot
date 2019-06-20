@@ -24,7 +24,7 @@ forestplot.default(x, ...)
 
 \item{...}{see parameters of method \code{\link{forestplot}}}
 
-\item{return_ggplots}{if \code{TRUE} the fuction returns 2 ggplot objects
+\item{return_ggplots}{if \code{TRUE} the function returns 2 ggplot objects
 in a list instead of drawing a tablegrid}
 
 \item{plot.widths}{the relative widths of the left and right plot
@@ -33,7 +33,7 @@ equal widths}
 
 \item{title}{the tile row of the drawn plot}
 
-\item{digits}{the number of siginficants digits to display}
+\item{digits}{the number of significant digits to display}
 
 \item{shape}{point shape, see \code{\link[ggplot2]{aes_linetype_size_shape}}}
 
@@ -50,8 +50,8 @@ equal widths}
 \item{row.names.y}{new names for the variable rows}
 }
 \description{
-Convinience function to create a plot of the \code{\link[rms]{orm}}  model
-summary. For further customising the plots use \code{return_ggplots = TRUE}
+Convenience function to create a plot of the \code{\link[rms]{orm}}  model
+summary. For further customizing the plots use \code{return_ggplots = TRUE}
 This will create 2 \code{ggplot2} objects that can be joined with the
 \code{\link{join_ggplots}} commands.
 }
@@ -81,7 +81,7 @@ forestplot(s)
 forestplot(s, return_ggplots = TRUE )
 
 #new row names and header
-newnames <- c("Year of birth", "Height", "Number of children", "Cranial volumne", "Sex" )
+newnames <- c("Year of birth", "Height", "Number of children", "Cranial volume", "Sex" )
 newhead <- c("Odds Ratio", "CI 5\%", "CI 95\%" )
 
 #adjust also the relative plot widths and change the color and shape

@@ -3,6 +3,7 @@
 * changed `predict_with_ci.orm` method name to `predict_with_ci`
 * added examples to all exported methods
 * updated documentation
+* fixed spelling
 
 # ormPlot 0.2.3
 

@@ -30,9 +30,9 @@ See exported methods for more details:
 
 \section{Prediction plotting}{
 
-The predicion plotting function facilitates plotting the
+The prediction plotting function facilitates plotting the
 \code{\link[rms]{orm}} objects using the results got from
-\code{\link[rms]{Predict}} function. In particular it adds coeficent
+\code{\link[rms]{Predict}} function. In particular it adds confidence
 intervals to orm prediction plots.
 
 See exported methods for more details:

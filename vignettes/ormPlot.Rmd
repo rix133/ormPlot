@@ -128,7 +128,7 @@ If this does not look nice enough you can also get `ggplot2` objects to customiz
 The best way to get customizable plots is to specify `return_ggplots=TRUE`
 ```{r fig.width=6}
 # you can use also the function forestplot instead of plot
-plots<-forestplot(summary(orm_model), return_ggplots=T)
+plots<-plot(summary(orm_model), return_ggplots=T)
 plots[[1]]
 plots[[2]]
 ```

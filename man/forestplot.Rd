@@ -6,6 +6,7 @@
 \alias{forestplot.orm}
 \alias{forestplot.lrm}
 \alias{forestplot.default}
+\alias{forestplot.summary.rms}
 \title{Forest Plot of an rms model summary}
 \usage{
 \method{plot}{summary.rms}(x, ...)
@@ -16,6 +17,8 @@ forestplot(x, return_ggplots = FALSE, plot.widths = c(0.5, 0.5),
   theme = ggplot2::theme_get(), row.names.y = NULL)
 
 forestplot.default(x, ...)
+
+forestplot.summary.rms(x, ...)
 }
 \arguments{
 \item{x}{result of a \code{summary} command on

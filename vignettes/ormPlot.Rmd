@@ -121,14 +121,14 @@ ggsave("educ_cran.svg",final_plot, height = 8 ,width = 8)
 ### Plotting the model summary
 The easiest way is to just plot the summary object
 ```{r fig.width=7, fig.height=4 }
-plot(summary(orm_model))
+forestplot(summary(orm_model))
 ```
 
 If this does not look nice enough you can also get `ggplot2` objects to customize to your needs.
 The best way to get customizable plots is to specify `return_ggplots=TRUE`
 ```{r fig.width=6}
-# you can use also the function forestplot instead of plot
-plots<-plot(summary(orm_model), return_ggplots=T)
+# you can use also use plot instead of forestplot
+plots<-forestplot(summary(orm_model), return_ggplots=T)
 plots[[1]]
 plots[[2]]
 ```

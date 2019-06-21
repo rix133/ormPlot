@@ -1,3 +1,6 @@
+# ormPlot 0.3.2
+* changed the S3 method default of forestplot to display a warning 
+
 # ormPlot 0.3.1
 * restricted foresplot method to work with summary.rms objects only
 * fixed spelling in the vignette

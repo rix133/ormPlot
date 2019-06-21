@@ -39,8 +39,8 @@ forestplot <- function(x, return_ggplots = FALSE,
     if(!inherits(x,"summary.rms"))  {
         if(inherits(x,"orm") | inherits(x,"lrm")){
             stop(paste0("The method must be run on a summary.rms object. ",
-                        "Use function summary(",x,
-                        ")to create it!", collapse = ""))
+                        "Use function summary(x",
+                        ") to create it!", collapse = ""))
         }
         else {
             stop(paste0("The method must be run on a summary.rms object ",
@@ -73,6 +73,14 @@ forestplot <- function(x, return_ggplots = FALSE,
 #' @rdname forestplot
 #' @export
 forestplot.default <- function(x, ...){
+    warning(paste("ormPlot does not know how to handle object of class ",
+                  class(x),
+                  "and can only be used on summary.rms"))
+}
+
+#' @rdname forestplot
+#' @export
+forestplot.summary.rms <- function(x, ...){
     forestplot(x, ...)
 }
 

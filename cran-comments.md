@@ -1,14 +1,12 @@
 ## Resubmission
-This is a resubmission. In this version I have re-examined the vignette:
+This is a resubmission. In this version I have re-examined the vignette error
+and hopefully resolved the issue. The issue seemed to be in having only the 
+default method for forestplot and missing the method for class rms.summary.
 
-* fixed spelling errors in the vignette
-* Have replaced the function call ´forestplot´ with a equivalent S3 method
-to fix the reason for the CRAN WARNING: "Error: Vignette re-building failed."
 However, I have been unable to reproduce this error on any of the 
-environments listed under Test  environments, so it is also possible that it was
- a false positive warning.
-
-I have changed the LICENSE file to comply with CRAN requirements.
+environments listed under Test environments, so it is also possible that I still
+misunderstood the problem. Therefore, I also changed the function calls in
+the vignette to call the method explicitly.
 
 ## Test environments
 * local windows 7 install, R 3.5.3

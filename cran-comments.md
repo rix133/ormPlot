@@ -12,6 +12,7 @@ the vignette to call the method explicitly.
 * local windows 7 install, R 3.5.3
 * local windows 7 install, R 3.6.0
 * local ubuntu 18.04, R 3.6.0
+* winbuilder windows-x86_64-w64-mingw32 (r-devel)
 * R-hub windows-x86_64-devel (r-devel)
 * R-hub ubuntu-gcc-release (r-release)
 * R-hub fedora-clang-devel (r-devel)

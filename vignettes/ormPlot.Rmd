@@ -22,7 +22,7 @@ library(rms)
 
 
 
-### Load the reqired libraries
+### Load the required libraries
 ```{r setup}
 #the regression modelling by F. Harrell
 library(rms)
@@ -34,8 +34,8 @@ library(ormPlot)
 library(ggplot2)
 ```
 
-### Looking at the bundeled data
-OrmPlot has `educ_data` bundeled. `educ_data` is used in this vignette
+### Looking at the bundled data
+OrmPlot has `educ_data` bundled. `educ_data` is used in this vignette
 to show the functionality of the package. To familiarize with the data:
 ```{r eval=FALSE}
 #show first 6 rows
@@ -53,7 +53,7 @@ help(educ_data)
 ```
 
 ### Setting up rms datadist
-The rms package requres that a `datadist` object is set up properly. According
+The rms package requires that a `datadist` object is set up properly. According
 to `datadist` documentation:
 `q.effect` is a set of two quantiles for computing the range of continuous
 variables to use in estimating regression effects.
@@ -75,11 +75,11 @@ orm_model<-orm(educ_3 ~ Rural + sex + n_siblings + cran_rzs + height_rzs +
 
 ### Plotting the model predictions with CI
 
-The main advantage of using ormPlot is that you get plots with coeficent intervals
+The main advantage of using ormPlot is that you get plots with confidence intervals
 shown on the plot.
 
-The simplest way is to predict for only one value. Plotting returs a 
-customisable ggplot object.
+The simplest way is to predict for only one value. Plotting returns a 
+customizable ggplot object.
 ```{r}
 plot(orm_model, cran_rzs)
 ```
@@ -91,7 +91,7 @@ plot(orm_model, cran_rzs,  Rural, sex)
 ```
 
 
-You can easily set custom lables.
+You can easily set custom labels.
 ```{r}
 
 p<-plot(orm_model, cran_rzs,  Rural, sex,
@@ -124,10 +124,10 @@ The easiest way is to just plot the summary object
 plot(summary(orm_model))
 ```
 
-If this does not look nice enogh you can also get `ggplot2` objects to customise to your needs.
+If this does not look nice enough you can also get `ggplot2` objects to customize to your needs.
 The best way to get customizable plots is to specify `return_ggplots=TRUE`
 ```{r fig.width=6}
-plots<-forestplot(summary(orm_model), return_ggplots=T)
+plots<-plot(summary(orm_model), return_ggplots=T)
 plots[[1]]
 plots[[2]]
 ```

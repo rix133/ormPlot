@@ -137,7 +137,6 @@ oddstable <- function(x) {
 #' @param theme the desired ggplot2 theme
 #' @param header names of the table columns
 #' @param row.names.y new names for the variable rows
-#' @inheritDotParams ggplot2::theme
 #'
 oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
                            header = NULL, row.names.y = NULL) {
@@ -215,7 +214,6 @@ oddstable_graph <- function(x, digits = 3, theme = ggplot2::theme_get(),
 #'  \code{\link[ggplot2]{scale_continuous}}
 #' @param breaks the x axis breaks as a vector,help see also:
 #'  \code{\link[ggplot2]{scale_continuous}}
-#' @inheritDotParams ggplot2::theme
 #'
 orm_graph <- function(x, theme = ggplot2::theme_get(), header = NULL,
                            row.names.y = NULL, shape = 19, limits = NULL,

@@ -153,12 +153,6 @@ for each axis (using \code{axis.ticks.x.bottom}, \code{axis.ticks.x.top},
 \code{axis.ticks.*} which inherits from \code{axis.ticks}, which in turn inherits
 from \code{line}}
   \item{axis.ticks.length}{length of tick marks (\code{unit})}
-  \item{axis.ticks.length.x}{length of tick marks (\code{unit})}
-  \item{axis.ticks.length.x.top}{length of tick marks (\code{unit})}
-  \item{axis.ticks.length.x.bottom}{length of tick marks (\code{unit})}
-  \item{axis.ticks.length.y}{length of tick marks (\code{unit})}
-  \item{axis.ticks.length.y.left}{length of tick marks (\code{unit})}
-  \item{axis.ticks.length.y.right}{length of tick marks (\code{unit})}
   \item{axis.line}{lines along axes (\code{\link[=element_line]{element_line()}}). Specify lines along all axes (\code{axis.line}),
 lines for each plane (using \code{axis.line.x} or \code{axis.line.y}), or individually
 for each axis (using \code{axis.line.x.bottom}, \code{axis.line.x.top},

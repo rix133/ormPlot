@@ -36,6 +36,19 @@ forestplot <- function(x, return_ggplots = FALSE,
                                theme = ggplot2::theme_get(),
                                row.names.y = NULL) {
 
+    if(!inherits(x,"summary.rms"))  {
+        if(inherits(x,"orm") | inherits(x,"lrm")){
+            stop(paste0("The method must be run on a summary.rms object. ",
+                        "Use function summary(",x,
+                        ")to create it!", collapse = ""))
+        }
+        else {
+            stop(paste0("The method must be run on a summary.rms object ",
+                        "that is created from a rms model object!",
+                         collapse = ""))
+        }
+    }
+
     oddstable <- oddstable(x)
 
     tableplot <- oddstable_graph(oddstable, digits, theme,

@@ -6,13 +6,12 @@ default method for forestplot and missing the method for class rms.summary.
 However, I have been unable to reproduce this error on any of the 
 environments listed under Test environments, so it is also possible that I still
 misunderstood the problem. Therefore, I also changed the function calls in
-the vignette to call the method explicitly.
+the vignette to call the method forestplot explicitly.
 
 ## Test environments
-* local windows 7 install, R 3.5.3
-* local windows 7 install, R 3.6.0
-* local ubuntu 18.04, R 3.6.0
-* winbuilder windows-x86_64-w64-mingw32 (r-devel)
+* Local windows 7 install, R 3.6.0
+* Winbuilder windows-x86_64-w64-mingw32 (r-devel)
+* Travis-ci ubuntu 14.04, R 3.6.0
 * R-hub windows-x86_64-devel (r-devel)
 * R-hub ubuntu-gcc-release (r-release)
 * R-hub fedora-clang-devel (r-devel)

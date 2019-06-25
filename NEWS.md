@@ -1,3 +1,7 @@
+# ormPlot 0.3.3
+* fixed vignette appearance (not done jet)
+* join_ggplots returns now a ggplot (not done jet)
+
 # ormPlot 0.3.2
 * changed the S3 method default of forestplot to display a warning 
 

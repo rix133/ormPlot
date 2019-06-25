@@ -1,6 +1,7 @@
 # ormPlot
 
 <!-- badges: start -->
+[![CRAN Status Badge](http://www.r-pkg.org/badges/version/ormPlot)](https://cran.r-project.org/package=ormPlot)
 [![Build Status](https://travis-ci.com/rix133/ormPlot.svg?branch=master)](https://travis-ci.com/rix133/ormPlot)
 [![Codecov test coverage](https://codecov.io/gh/rix133/ormPlot/branch/master/graph/badge.svg)](https://codecov.io/gh/rix133/ormPlot?branch=master)
 <!-- badges: end -->

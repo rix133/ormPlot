@@ -108,6 +108,8 @@ join_ggplots <- function(leftplot, rightplot,
 
 
     tablewidth <- grid::unit(c(plot.widths[1], plot.widths[2]), c("npc"))
+
+    #TODO add a function to join these plots
     p1g <- ggplot2::ggplotGrob(leftplot +
                                 ggplot2::labs(subtitle = "") +
                                 jointheme

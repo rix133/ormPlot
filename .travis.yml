@@ -1,7 +1,17 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: R
+language: r
 cache: packages
+
+r:
+  - oldrel
+  - release
+  - devel
+
+addons:
+  apt:
+    packages:
+      - libgit2-dev
 
 # warnings are  errors
 warnings_are_errors: true

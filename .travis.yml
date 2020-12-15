@@ -3,9 +3,6 @@
 language: R
 cache: packages
 
-before_install:
-  - cd ./WKRDB-EST2/subGroup6/icesRDBES/
-
 # warnings are  errors
 warnings_are_errors: true
 

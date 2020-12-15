@@ -1,7 +1,7 @@
 Package: ormPlot
 Type: Package
 Title: Advanced Plotting of Ordinal Regression  Models 
-Version: 0.3.2.9000
+Version: 0.3.3
 Authors@R: c(person("Richard", "Meitern", , "richard.meitern@ut.ee", c("aut", "cre")))
 Maintainer: Richard Meitern <richard.meitern@ut.ee>
 Description: An extension to the Regression Modeling Strategies package that

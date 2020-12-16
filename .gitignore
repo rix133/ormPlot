@@ -11,8 +11,6 @@
 # Output files from R CMD build
 /*.tar.gz
 
-#bukildignore
-.Rbuildignore
 
 # Output files from R CMD check
 /*.Rcheck/
@@ -49,5 +47,3 @@ doc
 Meta
 
 CRAN-RELEASE
-
-LICENSE

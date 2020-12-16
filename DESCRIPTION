@@ -1,15 +1,16 @@
 Package: ormPlot
 Type: Package
 Title: Advanced Plotting of Ordinal Regression  Models 
-Version: 0.3.3
-Authors@R: c(person("Richard", "Meitern", , "richard.meitern@ut.ee", c("aut", "cre")))
+Version: 0.3.4
+Authors@R: c(person("Richard", "Meitern", , "richard.meitern@ut.ee", role =  c("aut", "cre"), comment = c(ORCID = "0000-0002-2600-3002")))
 Maintainer: Richard Meitern <richard.meitern@ut.ee>
 Description: An extension to the Regression Modeling Strategies package that
-    facilitates plotting ordinal regression  model predictions together with confidence
-    intervals for each dependent variable level. 
+    facilitates plotting ordinal regression  model predictions together with
+    confidence intervals for each dependent variable level. 
     It also adds a functionality to plot the  model summary as a modifiable 
     object.
 License: MIT + file LICENSE
+URL: https://doi.org/10.1186/s12889-019-8072-7
 Encoding: UTF-8
 LazyData: true
 Depends:
@@ -23,7 +24,6 @@ Suggests:
     testthat (>= 2.1.0),
     vdiffr (>= 0.3.0),
     knitr (>= 1.22),
-    rmarkdown (>= 1.13),
     pander (>= 0.6.3)
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr

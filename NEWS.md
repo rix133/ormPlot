@@ -1,3 +1,6 @@
+# ormPlot 0.3.4
+* Updated package citation and description
+
 # ormPlot 0.3.3
 * fixed using vdiffr conditionally suggested by Prof Brian Ripley
 

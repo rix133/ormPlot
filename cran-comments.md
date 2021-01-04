@@ -1,6 +1,5 @@
 ## Resubmission
-Fixed the licence not being of appropriate format updated citation and
-description.
+Can now plot lrm models similary to orm
 
 ## Test environments
 * Local windows 10 install, R 4.0.3

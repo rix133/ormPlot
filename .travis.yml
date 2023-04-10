@@ -5,13 +5,17 @@ cache: packages
 
 os:
   - linux
-  - osx
 
 dist: focal
 r:
   - oldrel
   - release
   - devel
+  
+r_packages:
+  - remotes
+r_github_packages:
+  - harrelfe/Hmisc
 
 addons:
   apt:

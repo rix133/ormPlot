@@ -26,5 +26,5 @@ Suggests:
     knitr (>= 1.22),
     rmarkdown (>= 1.13),
     pander (>= 0.6.3)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 VignetteBuilder: knitr

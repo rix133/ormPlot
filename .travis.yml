@@ -3,6 +3,11 @@
 language: r
 cache: packages
 
+os:
+  - linux
+  - osx
+
+dist: focal
 r:
   - oldrel
   - release

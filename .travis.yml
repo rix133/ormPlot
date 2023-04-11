@@ -14,8 +14,9 @@ r:
   
 r_packages:
   - remotes
-r_github_packages:
-  - harrelfe/Hmisc
+  - Hmisc
+  - rms
+  - covr
 
 addons:
   apt:
@@ -25,8 +26,6 @@ addons:
 # warnings are  errors
 warnings_are_errors: true
 
-r_packages:
-  - covr
 
 after_success:
   - Rscript -e 'library(covr); codecov()'

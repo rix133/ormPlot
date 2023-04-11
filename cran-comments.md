@@ -1,23 +1,27 @@
 ## Resubmission
-Can now plot lrm models similary to orm
+Can now plot lrm models similar to orm. Fixes citation style issues and readme 
+links. 
 
 ## Test environments
-* Local windows 10 install, R 4.0.3
-* Travis-ci linux xenial, (r-devel, r-rel, r-oldrel)
+In addition to the local windows 10  R 4.1.3, I used the devtools::check_rhub()
+and devtools devtools::check_win_release() to check the package on multiple
+platforms. The list with results:
+
+* Local windows 10 install, R-oldrel 
+* Travis-ci linux focal, (r-devel, r-rel, r-oldrel) https://app.travis-ci.com/github/rix133/ormPlot
+* Windows Server 2022, R-rel, https://win-builder.r-project.org/2vPrCrm8aB74/
+* R-Hub Windows Server 2022, R-devel
+https://builder.r-hub.io/status/ormPlot_0.3.5.tar.gz-b272059b81934e78a4b0958acbc84608
 * R-hub Windows Server 2008 R2 SP1, R-devel, 32/64 bit (r-devel)
 * R-hub Fedora Linux, R-devel, clang, gfortran (r-devel)
-* Ubuntu Linux 16.04 LTS, R-release, GCC (r-rel)
 
 
 ## R CMD check results
-There were 0 NOTE, 0 ERRORs and 0 WARNINGs. on most platforms. However,
-On R-hub Fedora Linux, R-devel, clang, gfortran (r-devel) 
-There was one NOTE: Examples with CPU (user + system) or elapsed time > 5s
-On Ubuntu Linux 16.04 LTS, R-release, GCC (r-rel)
-ERROR: can't install suggested package 'vdiffr'
-However, this issue does not appear if variable _R_CHECK_FORCE_SUGGESTS_ is set
-to false. Hence, I belive there is nothing else I can to if I want to keep the
-tests.
+There were some notes warnings or errors in some platforms. However the checks
+from https://win-builder.r-project.org/ were all OK. The Travis-ci fails due to
+failure to install Hmisc. (Nothing I can do there). The Rhub Windows fails due
+to some tests failing because of API mismatch on svglite (I could remove these
+tests).  
 
 
 ## Downstream dependencies

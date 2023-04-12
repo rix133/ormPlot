@@ -41,11 +41,14 @@ rsconnect/
 
 .Rproj.user
 
+tests/testthat/_snaps/
+
 testingground.Rmd
 inst/doc
 doc
 Meta
 
 CRAN-RELEASE
+CRAN-SUBMISSION
 
 LICENSE

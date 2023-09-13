@@ -1,9 +1,8 @@
 ## Resubmission
-Can now plot lrm models similar to orm. Fixes citation style issues and readme 
-links. 
+Changed package documentation file syntax
 
 ## Test environments
-In addition to the local windows 10  R 4.1.3, I used the devtools::check_rhub()
+In addition to the local windows 10  R 4.3.1, I used the devtools::check_rhub()
 and devtools devtools::check_win_release() to check the package on multiple
 platforms. The list with results:
 
